@@ -1,4 +1,5 @@
 using UnityEngine;
+using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
@@ -12,11 +13,18 @@ public class PlayerController : MonoBehaviour
     public Transform deteksitanah; // Posisi deteksi tanah
     public float jangkauan; // Jarak deteksi tanah
     private Animator anim; // Komponen Animator untuk mengatur animasi karakter
+    public int heart; // Jumlah nyawa karakter
+    public TMP_Text info_heart; // Komponen TextMeshPro untuk menampilkan jumlah nyawa
+    public bool play_again = false; // Menyimpan informasi apakah karakter dapat memulai dari checkpoint terakhir
+    public GameObject over;
+    Vector2 play; // Posisi checkpoint terakhir
 
     void Start()
     {
+        play = transform.position;
         lompat = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        over.SetActive(false);
     }
 
     void Update()
@@ -47,6 +55,22 @@ public class PlayerController : MonoBehaviour
         }
 
         anim.SetBool("Jump", !tanah);
+
+        info_heart.text = "Nyawa : " + heart.ToString();
+
+        if (heart < 1)
+        {
+            gameObject.SetActive(false);
+            Debug.Log("Player Wafat");
+
+            over.SetActive(true);
+        }
+
+        if (play_again)
+        {
+            transform.position = play;
+            play_again = false;
+        }
     }
 
     void Move(int direction)
@@ -80,5 +104,15 @@ public class PlayerController : MonoBehaviour
         Vector3 Player = transform.localScale;
         Player.x *= -1;
         transform.localScale = Player;
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Checkpoint")
+        {
+            play = other.transform.position;
+            Debug.Log("Checkpoint");
+            StopAllCoroutines();
+        }
     }
 }
