@@ -1,5 +1,7 @@
-using UnityEngine;
 using TMPro;
+using System.Collections;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -114,5 +116,16 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Checkpoint");
             StopAllCoroutines();
         }
+    }
+
+    public void RestarLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    IEnumerator loadMiniGames(string Name)
+    {
+        SceneManager.LoadScene(Name, LoadSceneMode.Additive);
+        yield return new WaitUntil(() => SceneManager.GetSceneByName(Name).isLoaded);
     }
 }

@@ -1,11 +1,14 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class AlokInteraction : MonoBehaviour
 {
-    private PlayerController playerController;
+    public PlayerController playerController;
     private Animator playerAnimator;
     private bool isPlayerNearby = false;
     public GameObject dialogImage; // Drag and drop your Image GameObject here in the Inspector
+    [SerializeField] private string Alok1;
 
     private void Start()
     {
@@ -34,5 +37,16 @@ public class AlokInteraction : MonoBehaviour
             playerController.enabled = true; // Enable player movement
             dialogImage.SetActive(false); // Hide the dialog image
         }
+    }
+
+    public void SceneLoader() 
+    {
+        StartCoroutine(loadMiniGames(Alok1));
+    }
+
+    IEnumerator loadMiniGames(string Name)
+    {
+        SceneManager.LoadScene(Name, LoadSceneMode.Additive);
+        yield return new WaitUntil(() => SceneManager.GetSceneByName(Name).isLoaded);
     }
 }

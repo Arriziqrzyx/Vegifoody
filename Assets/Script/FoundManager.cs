@@ -1,5 +1,8 @@
 using UnityEngine;
 using TMPro;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class FoundManager : MonoBehaviour
 {
@@ -15,7 +18,8 @@ public class FoundManager : MonoBehaviour
 
     private int vegetablesFound = 0; // Counter for found vegetables
     private float currentTime; // Current time left
-
+    [SerializeField] private string Scene;
+    
     private void Awake()
     {
         if (instance == null)
@@ -86,5 +90,22 @@ public class FoundManager : MonoBehaviour
     private void ShowLosePanel()
     {
         losePanel.SetActive(true); // Show the lose panel
+    }
+
+    IEnumerator LoadGame(string Name)
+    {
+        SceneManager.LoadScene(Name, LoadSceneMode.Additive);
+        yield return new WaitUntil(() => SceneManager.GetSceneByName(Name).isLoaded);
+    }
+
+    public void PlayAgain()
+    {
+        StartCoroutine(LoadGame(Scene));
+    }
+
+
+    public void BackToGameplay()
+    {
+        SceneManager.UnloadSceneAsync(Scene);
     }
 }
