@@ -22,7 +22,7 @@ public class DialogAlok : MonoBehaviour
         "Tidak masalah. Aku siap.",
         "Wah kamu sangat berani sekali. Karena kamu punya semangat yang tinggi, ini aku beri hadiah. Mungkin ini akan berguna untuk petualangan kamu.",
         "Anjay sebuah materi pelajaran tentang sayuran. Terima kasih Alok, aku janji aku akan mempelajarinya.",
-        "Sama-sama. Hati-hati dalam perjalanan kamu selanjutnya. Semoga berhasil."
+        "Sama-sama. Hati-hati dalam perjalanan kamu selanjutnya. Semoga berhasil. Dan jangan lupa pelajari materi sayuran ini."
     };
 
     private GameObject[] avatars; // Array to store avatar GameObjects
