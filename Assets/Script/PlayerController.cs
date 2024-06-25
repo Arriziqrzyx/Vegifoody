@@ -58,7 +58,7 @@ public class PlayerController : MonoBehaviour
 
         anim.SetBool("Jump", !tanah);
 
-        info_heart.text = "Nyawa : " + heart.ToString();
+        info_heart.text = "Nyawa Tersisa : " + heart.ToString();
 
         if (heart < 1)
         {

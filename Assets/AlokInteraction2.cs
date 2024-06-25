@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class AlokInteraction : MonoBehaviour
+public class AlokInteraction2 : MonoBehaviour
 {
     public PlayerController playerController;
     private Animator playerAnimator;
     private bool isPlayerNearby = false;
     public GameObject dialogImage; // Drag and drop your Image GameObject here in the Inspector
-    [SerializeField] private string Alok1;
+    [SerializeField] private string Alok2;
 
     private void Start()
     {
@@ -42,7 +42,7 @@ public class AlokInteraction : MonoBehaviour
 
     public void SceneLoader() 
     {
-        StartCoroutine(loadMiniGames(Alok1));
+        StartCoroutine(loadMiniGames(Alok2));
     }
 
     IEnumerator loadMiniGames(string Name)
