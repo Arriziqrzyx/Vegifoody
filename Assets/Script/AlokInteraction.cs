@@ -8,14 +8,14 @@ public class AlokInteraction : MonoBehaviour
     public PlayerController playerController;
     private Animator playerAnimator;
     private bool isPlayerNearby = false;
-    public GameObject dialogImage; // Drag and drop your Image GameObject here in the Inspector
+    public GameObject dialogImage; 
     [SerializeField] private string Alok1;
 
     private void Start()
     {
-        playerController = FindObjectOfType<PlayerController>(); // Find the player controller in the scene
-        playerAnimator = playerController.GetComponent<Animator>(); // Get the Animator component from the player
-        dialogImage.SetActive(false); // Ensure the dialog image is initially hidden
+        playerController = FindObjectOfType<PlayerController>(); 
+        playerAnimator = playerController.GetComponent<Animator>(); 
+        dialogImage.SetActive(false); 
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -23,10 +23,10 @@ public class AlokInteraction : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             isPlayerNearby = true;
-            playerController.enabled = false; // Disable player movement
-            playerAnimator.SetBool("Run", false); // Set Run animation to false
-            playerAnimator.SetBool("Jump", false); // Set Jump animation to false
-            dialogImage.SetActive(true); // Show the dialog image
+            playerController.enabled = false; 
+            playerAnimator.SetBool("Run", false); 
+            playerAnimator.SetBool("Jump", false); 
+            dialogImage.SetActive(true); 
         }
     }
 
@@ -35,8 +35,8 @@ public class AlokInteraction : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             isPlayerNearby = false;
-            playerController.enabled = true; // Enable player movement
-            dialogImage.SetActive(false); // Hide the dialog image
+            playerController.enabled = true; 
+            dialogImage.SetActive(false); 
         }
     }
 

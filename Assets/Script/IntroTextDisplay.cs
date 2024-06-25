@@ -4,7 +4,7 @@ using System.Collections;
 
 public class IntroTextDisplay : MonoBehaviour
 {
-    public TextMeshProUGUI introText; // Drag and drop your TextMeshProUGUI element here in the Inspector
+    public TextMeshProUGUI introText; 
     private string[] storyTexts = new string[]
     {
         "Di sebuah desa kecil yang damai bernama Sayuria, hiduplah seorang anak bernama Budi yang sangat suka bermain di luar rumah.",
@@ -12,8 +12,8 @@ public class IntroTextDisplay : MonoBehaviour
         "Memek Budi bercerita bahwa siapa pun yang bisa menemukan semua sayuran di Kebun Ajaib akan menjadi kuat dan sehat.",
         "Penasaran dengan cerita neneknya, Budi memutuskan untuk mencari Kebun Ajaib."
     };
-    public float typingSpeed = 0.05f; // Speed of the typing effect
-    public float fadeDuration = 1.0f; // Duration of the fade in/out
+    public float typingSpeed = 0.05f; 
+    public float fadeDuration = 1.0f; 
 
     private void Start()
     {
@@ -24,31 +24,31 @@ public class IntroTextDisplay : MonoBehaviour
     {
         CanvasGroup canvasGroup = introText.GetComponent<CanvasGroup>();
 
-        // Ensure CanvasGroup component exists
+        
         if (canvasGroup == null)
         {
             canvasGroup = introText.gameObject.AddComponent<CanvasGroup>();
         }
 
-        // Fade in
+        
         yield return StartCoroutine(FadeCanvasGroup(canvasGroup, 0, 1, fadeDuration));
 
         foreach (string storyText in storyTexts)
         {
             yield return StartCoroutine(TypeText(storyText));
-            yield return new WaitForSeconds(1.0f); // Delay before starting the next sentence
+            yield return new WaitForSeconds(1.0f); 
         }
 
-        // Fade out
+        
         yield return StartCoroutine(FadeCanvasGroup(canvasGroup, 1, 0, fadeDuration));
 
-        // Load the next scene or transition to the game
+        
         UnityEngine.SceneManagement.SceneManager.LoadScene("2D Platformer");
     }
 
     private IEnumerator TypeText(string text)
     {
-        introText.text = ""; // Clear any existing text
+        introText.text = ""; 
         foreach (char letter in text.ToCharArray())
         {
             introText.text += letter;

@@ -5,21 +5,21 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
-    public int kecepatan; // Kecepatan gerakan horizontal
-    public int kekuatanlompat; // Kekuatan lompatan
-    public bool balik; // Menyimpan informasi arah hadap karakter
-    public int pindah; // Menyimpan arah gerakan karakter
-    private Rigidbody2D lompat; // Komponen Rigidbody2D untuk lompatan
-    public bool tanah; // Menyimpan informasi apakah karakter berada di tanah
-    public LayerMask targetlayer; // Layer yang dikategorikan sebagai tanah
-    public Transform deteksitanah; // Posisi deteksi tanah
-    public float jangkauan; // Jarak deteksi tanah
-    private Animator anim; // Komponen Animator untuk mengatur animasi karakter
-    public int heart; // Jumlah nyawa karakter
-    public TMP_Text info_heart; // Komponen TextMeshPro untuk menampilkan jumlah nyawa
-    public bool play_again = false; // Menyimpan informasi apakah karakter dapat memulai dari checkpoint terakhir
+    public int kecepatan; 
+    public int kekuatanlompat; 
+    public bool balik; 
+    public int pindah; 
+    private Rigidbody2D lompat; 
+    public bool tanah; 
+    public LayerMask targetlayer; 
+    public Transform deteksitanah; 
+    public float jangkauan; 
+    private Animator anim; 
+    public int heart; 
+    public TMP_Text info_heart; 
+    public bool play_again = false; 
     public GameObject over;
-    Vector2 play; // Posisi checkpoint terakhir
+    Vector2 play; 
 
     void Start()
     {

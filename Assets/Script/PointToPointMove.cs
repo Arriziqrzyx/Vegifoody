@@ -4,23 +4,21 @@ using UnityEngine;
 
 public class PointToPointMove : MonoBehaviour
 {
-    [SerializeField] float speed; //speed platform
-    [SerializeField] int startingPoint; //location platform start
-    [SerializeField] Transform[] points; //array tranform points
+    [SerializeField] float speed; 
+    [SerializeField] int startingPoint; 
+    [SerializeField] Transform[] points; 
 
-    private int currentIndexPoint; //index of array
+    private int currentIndexPoint; 
 
     private void Start()
     {
-        /*
-        setting the starting position platform using index startingPoint
-        */
+       
         transform.position = points[startingPoint].position;
     }
 
     private void Update()
     {
-        // checking distance of the platform and the point
+        
         if (Vector2.Distance(transform.position, points[currentIndexPoint].position) < 0.1f)
         {
             currentIndexPoint++;

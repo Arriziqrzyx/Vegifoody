@@ -6,20 +6,20 @@ using UnityEngine.SceneManagement;
 
 public class QuizManager : MonoBehaviour
 {
-    public Question[] questions; // Array untuk menyimpan pertanyaan
-    private int currentQuestionIndex; // Indeks pertanyaan saat ini
-    public TMP_Text questionText; // Teks pertanyaan
-    public Button[] answerButtons; // Tombol opsi jawaban
-    public GameObject successPanel; // Panel hasil "Berhasil"
-    public GameObject failPanel; // Panel hasil "Kalah"
-    public TMP_Text resultWinText; // Teks hasil akhir
-    public TMP_Text resultLoseText; // Teks hasil akhir
+    public Question[] questions; 
+    private int currentQuestionIndex; 
+    public TMP_Text questionText; 
+    public Button[] answerButtons; 
+    public GameObject successPanel; 
+    public GameObject failPanel; 
+    public TMP_Text resultWinText; 
+    public TMP_Text resultLoseText; 
     [SerializeField] private string Scene;
-    private int correctAnswersCount; // Jumlah jawaban benar
+    private int correctAnswersCount; 
 
     private void Start()
     {
-        // Inisialisasi game dengan memuat pertanyaan pertama
+        
         currentQuestionIndex = 0;
         correctAnswersCount = 0;
         LoadQuestion(currentQuestionIndex);
@@ -27,7 +27,7 @@ public class QuizManager : MonoBehaviour
 
     private void LoadQuestion(int questionIndex)
     {
-        // Memuat pertanyaan dan opsi jawaban ke antarmuka pengguna
+        
         questionText.text = questions[questionIndex].question;
 
         for (int i = 0; i < answerButtons.Length; i++)
@@ -38,7 +38,7 @@ public class QuizManager : MonoBehaviour
 
     public void AnswerButtonClicked(int buttonIndex)
     {
-        // Memeriksa jawaban yang dipilih oleh pemain
+        
         if (buttonIndex == questions[currentQuestionIndex].correctAnswerIndex)
         {
             Debug.Log("Jawaban benar!");
@@ -49,7 +49,7 @@ public class QuizManager : MonoBehaviour
             Debug.Log("Jawaban salah!");
         }
 
-        // Pindah ke pertanyaan selanjutnya
+        
         currentQuestionIndex++;
 
         if (currentQuestionIndex < questions.Length)
@@ -64,17 +64,17 @@ public class QuizManager : MonoBehaviour
 
     private void ShowResult()
     {
-        // Menghitung skor berdasarkan jawaban benar
+        
         int score = (int)(((float)correctAnswersCount / questions.Length) * 100);
 
         if (correctAnswersCount >= 4)
         {
-            successPanel.SetActive(true); // Tampilkan panel "Berhasil"
+            successPanel.SetActive(true); 
             resultWinText.text = "Menang! Skor: " + score;
         }
         else
         {
-            failPanel.SetActive(true); // Tampilkan panel "Kalah"
+            failPanel.SetActive(true); 
             resultLoseText.text = "Kalah! Skor: " + score;
         }
     }

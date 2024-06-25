@@ -6,18 +6,18 @@ using UnityEngine.SceneManagement;
 
 public class FoundManager : MonoBehaviour
 {
-    public static FoundManager instance; // Singleton instance
-    private int score = 0; // Initial score
-    public TMP_Text scoreText; // Drag and drop your TMP_Text element for displaying score here in the Inspector
-    public GameObject winPanel; // Drag and drop the win panel GameObject here in the Inspector
-    public TMP_Text winPanelText; // Drag and drop the TMP_Text element from win panel here in the Inspector
-    public GameObject losePanel; // Drag and drop the lose panel GameObject here in the Inspector
-    public TMP_Text timerText; // Drag and drop the TMP_Text element for displaying the timer
-    public int totalVegetables; // Set the total number of vegetables in the scene
-    public float gameTime = 60f; // Total game time in seconds
+    public static FoundManager instance; 
+    private int score = 0; 
+    public TMP_Text scoreText; 
+    public GameObject winPanel; 
+    public TMP_Text winPanelText; 
+    public GameObject losePanel; 
+    public TMP_Text timerText; 
+    public int totalVegetables; 
+    public float gameTime = 60f; 
 
-    private int vegetablesFound = 0; // Counter for found vegetables
-    private float currentTime; // Current time left
+    private int vegetablesFound = 0; 
+    private float currentTime; 
     [SerializeField] private string Scene;
     
     private void Awake()
@@ -34,8 +34,8 @@ public class FoundManager : MonoBehaviour
 
     private void Start()
     {
-        winPanel.SetActive(false); // Ensure the win panel is initially hidden
-        losePanel.SetActive(false); // Ensure the lose panel is initially hidden
+        winPanel.SetActive(false); 
+        losePanel.SetActive(false); 
         currentTime = gameTime;
         UpdateScoreUI();
         UpdateTimerUI();
@@ -83,13 +83,13 @@ public class FoundManager : MonoBehaviour
 
     private void ShowWinPanel()
     {
-        winPanel.SetActive(true); // Show the win panel
-        winPanelText.text = "Kamu Menang. Skor kamu: " + score.ToString(); // Update the win panel text with score
+        winPanel.SetActive(true); 
+        winPanelText.text = "Kamu Menang. Skor kamu: " + score.ToString(); 
     }
 
     private void ShowLosePanel()
     {
-        losePanel.SetActive(true); // Show the lose panel
+        losePanel.SetActive(true); 
     }
 
     IEnumerator LoadGame(string Name)
