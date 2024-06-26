@@ -29,4 +29,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Quiz2.unity
     guid: 69a6aaffbc947fa459064703a53feeaa
+  - enabled: 1
+    path: Assets/Scenes/Kebun.unity
+    guid: ea80b3fcd6557164aa4e29c00fe93267
   m_configObjects: {}
