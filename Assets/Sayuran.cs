@@ -21,9 +21,14 @@ public class Sayuran : MonoBehaviour
         {
             checkImage.gameObject.SetActive(true); // Aktifkan gambar check
         }
-        FoodManager.Instance.UpdateScore(10); // Tambah skor
 
         // Hancurkan objek setelah diklik
         Destroy(gameObject);
+
+        // Periksa apakah semua sayuran telah dikumpulkan
+        if (FoodManager.Instance != null)
+        {
+            FoodManager.Instance.SayuranCollected(); // Panggil untuk memeriksa apakah permainan menang
+        }
     }
 }

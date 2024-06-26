@@ -32,4 +32,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Kebun.unity
     guid: ea80b3fcd6557164aa4e29c00fe93267
+  - enabled: 1
+    path: Assets/Scenes/Credit.unity
+    guid: a1c926edd333a9c46a6b990779846b06
   m_configObjects: {}
