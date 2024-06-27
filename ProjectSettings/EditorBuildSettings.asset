@@ -35,4 +35,11 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Credit.unity
     guid: a1c926edd333a9c46a6b990779846b06
-  m_configObjects: {}
+  - enabled: 1
+    path: Assets/Scenes/FoundItIntro.unity
+    guid: 9c49331363580ad4b868e18bc664b3d6
+  m_configObjects:
+    com.unity.adaptiveperformance.google.android.provider_settings: {fileID: 11400000, guid: 77d71324c4afda041804ec0302456726, type: 2}
+    com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: a7e08d9723678a04589cc987d209d32b, type: 2}
+    com.unity.adaptiveperformance.samsung.android.provider_settings: {fileID: 11400000, guid: 4923cb761c8bd6c47b2297abc16d739e, type: 2}
+    com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000, guid: 99590240be9c5b24f8de5c7abb670032, type: 2}

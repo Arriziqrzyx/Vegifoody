@@ -13,6 +13,7 @@ public class DialogAlok : MonoBehaviour
     public float messageDelay = 1.5f; 
     public GameObject button; 
     public GameObject alokObject; 
+    public AudioSource typingAudioSource;
 
     private string[] messages = new string[]
     {
@@ -52,12 +53,14 @@ public class DialogAlok : MonoBehaviour
             dialogText.text = ""; 
             avatars[messageIndex].SetActive(true); 
 
+            typingAudioSource.Play();
             foreach (char letter in messages[messageIndex].ToCharArray())
             {
                 dialogText.text += letter;
                 yield return new WaitForSeconds(typingSpeed);
             }
-
+            typingAudioSource.Stop();
+            
             isTyping = false;
 
             yield return new WaitForSeconds(messageDelay); 

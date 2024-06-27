@@ -20,6 +20,12 @@ public class PlayerController : MonoBehaviour
     public bool play_again = false; 
     public GameObject over;
     Vector2 play; 
+    [SerializeField] AudioSource jumpAudio;
+    [SerializeField] AudioSource dieAudio;
+    [SerializeField] AudioSource checkpointAudio;
+    [SerializeField] AudioSource hatiAudio;
+    private bool Button_kiri; 
+    private bool Button_kanan; 
 
     void Start()
     {
@@ -33,11 +39,11 @@ public class PlayerController : MonoBehaviour
     {
         tanah = Physics2D.OverlapCircle(deteksitanah.position, jangkauan, targetlayer);
 
-        if (Input.GetKey(KeyCode.D))
+        if (Input.GetKey(KeyCode.D) || Button_kanan)
         {
             Move(1);
         }
-        else if (Input.GetKey(KeyCode.A))
+        else if (Input.GetKey(KeyCode.A) || Button_kiri)
         {
             Move(-1);
         }
@@ -72,6 +78,7 @@ public class PlayerController : MonoBehaviour
         {
             transform.position = play;
             play_again = false;
+            dieAudio.Play();
         }
     }
 
@@ -96,7 +103,7 @@ public class PlayerController : MonoBehaviour
         {
             float x = lompat.velocity.x;
             lompat.velocity = new Vector2(x, kekuatanlompat);
-            Debug.Log("lompat");
+            jumpAudio.Play();
         }
     }
 
@@ -115,6 +122,12 @@ public class PlayerController : MonoBehaviour
             play = other.transform.position;
             Debug.Log("Checkpoint");
             StopAllCoroutines();
+            checkpointAudio.Play();
+        }
+
+        if (other.gameObject.tag == "HatiHati")
+        {
+            hatiAudio.Play();
         }
     }
 
@@ -128,4 +141,30 @@ public class PlayerController : MonoBehaviour
         SceneManager.LoadScene(Name, LoadSceneMode.Additive);
         yield return new WaitUntil(() => SceneManager.GetSceneByName(Name).isLoaded);
     }
+
+    public void tekan_kiri()
+    {
+        Button_kiri = true; // Ketika ditekan
+    }
+
+    public void lepas_kiri()
+    {
+        Button_kiri = false; // Ketika dilepas
+    }
+
+    public void tekan_kanan()
+    {
+        Button_kanan = true; // Ketika ditekan
+    }
+
+    public void lepas_kanan()
+    {
+        Button_kanan = false; // Ketika dilepas
+    }
+
+    public void tekan_lompat()
+    {
+        Jump();
+    }
+
 }

@@ -9,5 +9,11 @@ public class SceneLoader : MonoBehaviour
     {
         SceneManager.LoadScene(sceneName);
     }
+
+    public void Keluar()
+    {
+        Debug.Log ("KAMU TELAH KELUAR!");
+        Application.Quit();
+    }
    
 }

@@ -13,6 +13,7 @@ public class DialogPenjaga1 : MonoBehaviour
     public float messageDelay = 1.5f; 
     public GameObject button; 
     public GameObject mewingObject; 
+    public AudioSource typingAudioSource;
 
     private string[] messages = new string[]
     {
@@ -54,11 +55,13 @@ public class DialogPenjaga1 : MonoBehaviour
             dialogText.text = ""; 
             avatars[messageIndex].SetActive(true); 
 
+            typingAudioSource.Play();
             foreach (char letter in messages[messageIndex].ToCharArray())
             {
                 dialogText.text += letter;
                 yield return new WaitForSeconds(typingSpeed);
             }
+            typingAudioSource.Stop();
 
             isTyping = false;
 

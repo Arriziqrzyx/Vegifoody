@@ -18,6 +18,9 @@ public class QuizManager2 : MonoBehaviour
     public TMP_Text correctAnswersTextFail; // Untuk panel kalah
     [SerializeField] private string Scene;
     private int correctAnswersCount;
+    [SerializeField] AudioSource benarAudio;
+    [SerializeField] AudioSource SalahAudio;
+    private const string HighScoreKey = "HighScore2";
 
     private void Start()
     {
@@ -42,11 +45,13 @@ public class QuizManager2 : MonoBehaviour
         if (buttonIndex == questions[currentQuestionIndex].correctAnswerIndex)
         {
             Debug.Log("Jawaban benar!");
+            benarAudio.Play();
             correctAnswersCount++;
         }
         else
         {
             Debug.Log("Jawaban salah!");
+            SalahAudio.Play();
         }
 
         UpdateCorrectAnswersUI();
@@ -67,6 +72,13 @@ public class QuizManager2 : MonoBehaviour
     private void ShowResult()
     {
         int score = (int)(((float)correctAnswersCount / questions.Length) * 100);
+
+        // Simpan skor tertinggi jika lebih besar
+        int highScore = PlayerPrefs.GetInt(HighScoreKey, 0);
+        if (score > highScore)
+        {
+            PlayerPrefs.SetInt(HighScoreKey, score);
+        }
 
         if (correctAnswersCount >= 5)
         {
@@ -100,5 +112,10 @@ public class QuizManager2 : MonoBehaviour
     {
         correctAnswersText.text = $"{correctAnswersCount}/{questions.Length}";
         correctAnswersTextFail.text = $"{correctAnswersCount}/{questions.Length}";
+    }
+
+    public int GetHighScore()
+    {
+        return PlayerPrefs.GetInt(HighScoreKey, 0);
     }
 }

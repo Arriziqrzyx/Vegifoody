@@ -15,6 +15,9 @@ public class PlayerController2 : MonoBehaviour
     public Transform deteksitanah; 
     public float jangkauan; 
     private Animator anim; 
+    [SerializeField] AudioSource jumpAudio;
+    private bool Button_kiri; 
+    private bool Button_kanan; 
 
     void Start()
     {
@@ -26,11 +29,11 @@ public class PlayerController2 : MonoBehaviour
     {
         tanah = Physics2D.OverlapCircle(deteksitanah.position, jangkauan, targetlayer);
 
-        if (Input.GetKey(KeyCode.D))
+        if (Input.GetKey(KeyCode.D) || Button_kanan)
         {
             Move(1);
         }
-        else if (Input.GetKey(KeyCode.A))
+        else if (Input.GetKey(KeyCode.A) || Button_kiri)
         {
             Move(-1);
         }
@@ -73,6 +76,7 @@ public class PlayerController2 : MonoBehaviour
         {
             float x = lompat.velocity.x;
             lompat.velocity = new Vector2(x, kekuatanlompat);
+            jumpAudio.Play();
         }
     }
 
@@ -89,4 +93,30 @@ public class PlayerController2 : MonoBehaviour
         SceneManager.LoadScene(Name, LoadSceneMode.Additive);
         yield return new WaitUntil(() => SceneManager.GetSceneByName(Name).isLoaded);
     }
+
+    public void tekan_kiri()
+    {
+        Button_kiri = true; 
+    }
+
+    public void Lepas_kiri()
+    {
+        Button_kiri = false; 
+    }
+
+    public void tekan_kanan()
+    {
+        Button_kanan = true; 
+    }
+
+    public void lepas_kanan()
+    {
+        Button_kanan = false; 
+    }
+
+    public void tekan_lompat()
+    {
+        Jump();
+    }
+
 }
