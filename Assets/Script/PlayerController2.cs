@@ -17,7 +17,8 @@ public class PlayerController2 : MonoBehaviour
     private Animator anim; 
     [SerializeField] AudioSource jumpAudio;
     private bool Button_kiri; 
-    private bool Button_kanan; 
+    private bool Button_kanan;
+    private bool Button_atas;
 
     void Start()
     {
@@ -42,7 +43,7 @@ public class PlayerController2 : MonoBehaviour
             anim.SetBool("Run", false);
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) || Button_atas)
         {
             Jump();
         }
@@ -114,9 +115,14 @@ public class PlayerController2 : MonoBehaviour
         Button_kanan = false; 
     }
 
-    public void tekan_lompat()
+    public void tekan_atas()
     {
-        Jump();
+        Button_atas = true;
+    }
+
+    public void lepas_atas()
+    {
+        Button_atas = false;
     }
 
 }

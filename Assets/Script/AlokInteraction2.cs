@@ -7,7 +7,6 @@ public class AlokInteraction2 : MonoBehaviour
 {
     public PlayerController playerController;
     private Animator playerAnimator;
-    private bool isPlayerNearby = false;
     public GameObject dialogImage; 
     [SerializeField] private string Alok2;
 
@@ -22,7 +21,6 @@ public class AlokInteraction2 : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            isPlayerNearby = true;
             playerController.enabled = false; 
             playerAnimator.SetBool("Run", false); 
             playerAnimator.SetBool("Jump", false); 
@@ -34,20 +32,32 @@ public class AlokInteraction2 : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            isPlayerNearby = false;
             playerController.enabled = true; 
             dialogImage.SetActive(false); 
         }
     }
 
-    public void SceneLoader() 
+    public void DelayedSceneLoader()
+    {
+        StartCoroutine(DelayAndLoad());
+    }
+
+    private IEnumerator DelayAndLoad()
+    {
+        yield return new WaitForSeconds(2.5f);
+
+        SceneLoader();
+    }
+
+    private void SceneLoader()
     {
         StartCoroutine(loadMiniGames(Alok2));
     }
 
-    IEnumerator loadMiniGames(string Name)
+    private IEnumerator loadMiniGames(string Name)
     {
         SceneManager.LoadScene(Name, LoadSceneMode.Additive);
         yield return new WaitUntil(() => SceneManager.GetSceneByName(Name).isLoaded);
     }
+
 }

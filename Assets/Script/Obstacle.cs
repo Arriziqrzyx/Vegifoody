@@ -19,7 +19,8 @@ public class Obstacle : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other) {
         if(other.transform.tag == "Player")
         {
-            KomponenPlayer.heart--;
+            KomponenPlayer.RemoveHeart();
+            KomponenPlayer.UpdateHeartDisplay();
             KomponenPlayer.play_again=true;
         }
     }

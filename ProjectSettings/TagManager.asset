@@ -8,6 +8,7 @@ TagManager:
   - Obstacle
   - SayuranSehat
   - HatiHati
+  - CrossFadePlat
   layers:
   - Default
   - TransparentFX

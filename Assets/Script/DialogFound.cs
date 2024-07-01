@@ -17,9 +17,9 @@ public class DialogFound : MonoBehaviour
     private string[] messages = new string[]
     {
         "Aku ada permainan kecil untukmu Budi. Permainan ini akan melatih ketajaman mata kamu.",
-        "Permaianan apa itu Alok? Sepertinya menatik!.",
+        "Permaianan apa itu Alok? Sepertinya menarik!.",
         "Aku sudah menyiapkan beberapa sayuran segar dan juga ada beberapa sayuran dan buah yang busuk. Kamu harus menemukan semua sayuran segar itu dalam waktu 2 menit. jika lebih dari 2 menit maka kamu gagal.",
-        "Dan jika kamu mengambil sayuran atau buah busuk, akan mengurangi nyawa kamu. Kamu akan memiliki nyawa atau kesempatan sebanyak 5 kali. Jika nyawa habis maka kamu gagal.",
+        "Dan jika kamu mengambil sayuran atau buah busuk, akan mengurangi waktu 5 detik & nyawa kamu. Kamu akan memiliki nyawa atau kesempatan sebanyak 5 kali. Jika nyawa habis maka kamu gagal.",
         "Okeee. Permainan ini menantang juga. Jadi aku harus menemukan semua sayuran segar secepat mungkin dan sebisa mungkin tidak mengambil yang busuk ya?",
         "Benar. Penilian skornya adalah melalui waktu. Semakin cepat kamu menyelesaikannya, semakin besar skor yang akan di dapat.",
         "Seru juga nih! Baiklah, Aku mengerti. Ayo kita mulai"
@@ -29,7 +29,7 @@ public class DialogFound : MonoBehaviour
 
     private GameObject[] avatars; 
     private int messageIndex = 0;
-    private bool isTyping = false; 
+    // private bool isTyping = false; 
 
     private void Start()
     {
@@ -37,7 +37,7 @@ public class DialogFound : MonoBehaviour
         button.SetActive(false); 
         
         avatars = new GameObject[] { alokAvatar, budiAvatar, alokAvatar, alokAvatar, budiAvatar, alokAvatar, budiAvatar };
-
+        
         StartCoroutine(StartDialog());
     }
 
@@ -47,7 +47,7 @@ public class DialogFound : MonoBehaviour
 
         while (messageIndex < messages.Length)
         {
-            isTyping = true;
+            // isTyping = true;
             dialogText.text = ""; 
             avatars[messageIndex].SetActive(true); 
 
@@ -59,7 +59,7 @@ public class DialogFound : MonoBehaviour
             }
             typingAudioSource.Stop();
 
-            isTyping = false;
+            // isTyping = false;
 
             yield return new WaitForSeconds(messageDelay); 
 

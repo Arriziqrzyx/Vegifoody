@@ -31,7 +31,7 @@ public class DialogPenjaga1 : MonoBehaviour
     private GameObject[] avatars; 
     private PlayerController playerController;
     private int messageIndex = 0;
-    private bool isTyping = false; 
+    // private bool isTyping = false; 
 
     private void Start()
     {
@@ -51,7 +51,7 @@ public class DialogPenjaga1 : MonoBehaviour
 
         while (messageIndex < messages.Length)
         {
-            isTyping = true;
+            // isTyping = true;
             dialogText.text = ""; 
             avatars[messageIndex].SetActive(true); 
 
@@ -63,7 +63,7 @@ public class DialogPenjaga1 : MonoBehaviour
             }
             typingAudioSource.Stop();
 
-            isTyping = false;
+            // isTyping = false;
 
             yield return new WaitForSeconds(messageDelay); 
 
@@ -82,11 +82,9 @@ public class DialogPenjaga1 : MonoBehaviour
 
     public void OnButtonClick()
     {
-        
         playerController.enabled = true;
-        Destroy(mewingObject);
-
-        
-        gameObject.SetActive(false); 
+        mewingObject.GetComponent<SpriteRenderer>().enabled = false;
+        mewingObject.GetComponent<BoxCollider2D>().enabled = false;
+        gameObject.SetActive(false);  
     }
 }

@@ -10,8 +10,8 @@ public class IntroTextDisplay : MonoBehaviour
     private string[] storyTexts = new string[]
     {
         "Di sebuah desa kecil yang damai bernama Sayuria, hiduplah seorang anak bernama Budi yang sangat suka bermain di luar rumah.",
-        "Suatu hari, Budi mendengar cerita dari memeknya tentang Kebun Ajaib yang penuh dengan sayuran lezat dan bergizi.",
-        "Memek Budi bercerita bahwa siapa pun yang bisa menemukan semua sayuran di Kebun Ajaib akan menjadi kuat dan sehat.",
+        "Suatu hari, Budi mendengar cerita dari neneknya tentang Kebun Ajaib yang penuh dengan sayuran lezat dan bergizi.",
+        "Nenek Budi bercerita bahwa siapa pun yang bisa menemukan semua sayuran di Kebun Ajaib akan menjadi kuat dan sehat.",
         "Penasaran dengan cerita neneknya, Budi memutuskan untuk mencari Kebun Ajaib."
     };
     public float typingSpeed = 0.05f;

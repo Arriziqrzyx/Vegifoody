@@ -16,6 +16,9 @@ public class BGM : MonoBehaviour
 
             // Jangan hancurkan objek ini saat berpindah scene
             DontDestroyOnLoad(gameObject);
+
+            // Atur target frame rate menjadi 60 FPS
+            Application.targetFrameRate = 60;
         }
         else
         {

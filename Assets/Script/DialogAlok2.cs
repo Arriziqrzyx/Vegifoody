@@ -26,7 +26,7 @@ public class DialogAlok2 : MonoBehaviour
         "Mewing adalah penjaga pertama. Dia punya saudara kembar bernama Skibidi yang sangat lebih tegas dari Mewing. Sampai saat ini, jarang ada orang yang berhasil lolos ujian dari Skibidi.",
         "Aku sudah bilang kepadamu bahwa aku sangat bersungguh-sungguh ingin pergi ke kebun ajaib. Aku siap menghadapi rintangan apapun untuk itu, bahkan ujian Skibidi pun aku berani menghadapinya.",
         "Seperti biasa, kamu memang anak yang pemberani dan pantang menyerah. Aku hargai sikapmu itu, Budi. Jarang sekali orang yang seperti kamu. Oleh karena itu, ini aku beri kamu hadiah lagi.",
-        "Bejirrr, sebuah materi tentang manfaat sayuran. Terima kasih, Alok. Tapi kenapa kamu selalu membantuku? Pertama kamu memberiku materi macam-macam sayuran. Sekarang kamu memberi materi tentang manfaat sayuran. Siapa kamu sebenarnya?",
+        "Kereennn!, sebuah materi tentang manfaat sayuran. Terima kasih, Alok. Tapi kenapa kamu selalu membantuku? Pertama kamu memberiku materi macam-macam sayuran. Sekarang kamu memberi materi tentang manfaat sayuran. Siapa kamu sebenarnya?",
         "Sama-sama. Aku membantu kamu karena aku sangat mengapresiasi anak yang rajin, berani, dan pantang menyerah. Kamu memiliki itu semua, Budi. Mengenai siapa diriku, nanti kamu akan tahu sendiri.",
         "Tapi, Alok...",
         "Sudah saatnya aku pergi, Budi. Sebaiknya kamu pelajari materi yang aku berikan ini agar kamu siap bertemu dengan Skibidi. Senang bertemu denganmu, Budi. Semoga kita bertemu lagi."
@@ -34,7 +34,7 @@ public class DialogAlok2 : MonoBehaviour
 
     private PlayerController playerController;
     private int messageIndex = 0;
-    private bool isTyping = false; 
+    // private bool isTyping = false; 
 
     private void Start()
     {
@@ -51,7 +51,7 @@ public class DialogAlok2 : MonoBehaviour
 
         while (messageIndex < messages.Length)
         {
-            isTyping = true;
+            // isTyping = true;
             dialogText.text = ""; 
 
             
@@ -74,7 +74,7 @@ public class DialogAlok2 : MonoBehaviour
             }
             typingAudioSource.Stop();
 
-            isTyping = false;
+            // isTyping = false;
 
             yield return new WaitForSeconds(messageDelay); 
 
@@ -101,11 +101,9 @@ public class DialogAlok2 : MonoBehaviour
 
     public void OnButtonClick()
     {
-        
         playerController.enabled = true;
-        Destroy(alokObject);
-
-        
-        gameObject.SetActive(false); 
+        alokObject.GetComponent<SpriteRenderer>().enabled = false;
+        alokObject.GetComponent<BoxCollider2D>().enabled = false;
+        gameObject.SetActive(false);  
     }
 }

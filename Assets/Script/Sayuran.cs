@@ -26,11 +26,5 @@ public class Sayuran : MonoBehaviour
 
         // Hancurkan objek setelah diklik
         Destroy(gameObject);
-
-        // Periksa apakah semua sayuran telah dikumpulkan
-        if (FoodManager.Instance != null)
-        {
-            FoodManager.Instance.SayuranCollected(); // Panggil untuk memeriksa apakah permainan menang
-        }
     }
 }

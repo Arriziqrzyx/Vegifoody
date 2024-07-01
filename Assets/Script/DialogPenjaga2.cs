@@ -36,7 +36,7 @@ public class DialogPenjaga2 : MonoBehaviour
     private GameObject[] avatars; 
     private PlayerController playerController;
     private int messageIndex = 0;
-    private bool isTyping = false; 
+    // private bool isTyping = false; 
 
     private void Start()
     {
@@ -56,7 +56,7 @@ public class DialogPenjaga2 : MonoBehaviour
 
         while (messageIndex < messages.Length)
         {
-            isTyping = true;
+            // isTyping = true;
             dialogText.text = ""; 
             avatars[messageIndex].SetActive(true); 
 
@@ -68,7 +68,7 @@ public class DialogPenjaga2 : MonoBehaviour
             }
             typingAudioSource.Stop();
 
-            isTyping = false;
+            // isTyping = false;
 
             yield return new WaitForSeconds(messageDelay); 
 
@@ -87,11 +87,9 @@ public class DialogPenjaga2 : MonoBehaviour
 
     public void OnButtonClick()
     {
-        
         playerController.enabled = true;
-        Destroy(skibidiObject);
-
-        
-        gameObject.SetActive(false); 
+        skibidiObject.GetComponent<SpriteRenderer>().enabled = false;
+        skibidiObject.GetComponent<BoxCollider2D>().enabled = false;
+        gameObject.SetActive(false);  
     }
 }

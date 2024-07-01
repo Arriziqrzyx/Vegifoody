@@ -15,8 +15,7 @@ public class PlayerController : MonoBehaviour
     public Transform deteksitanah; 
     public float jangkauan; 
     private Animator anim; 
-    public int heart; 
-    public TMP_Text info_heart; 
+    public GameObject[] hearts;
     public bool play_again = false; 
     public GameObject over;
     Vector2 play; 
@@ -25,7 +24,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] AudioSource checkpointAudio;
     [SerializeField] AudioSource hatiAudio;
     private bool Button_kiri; 
-    private bool Button_kanan; 
+    private bool Button_kanan;
+    private bool Button_atas; 
 
     void Start()
     {
@@ -52,7 +52,7 @@ public class PlayerController : MonoBehaviour
             anim.SetBool("Run", false);
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) || Button_atas)
         {
             Jump();
         }
@@ -64,9 +64,9 @@ public class PlayerController : MonoBehaviour
 
         anim.SetBool("Jump", !tanah);
 
-        info_heart.text = "Nyawa Tersisa : " + heart.ToString();
+        UpdateHeartDisplay();
 
-        if (heart < 1)
+        if (CountActiveHearts() < 1)
         {
             gameObject.SetActive(false);
             Debug.Log("Player Wafat");
@@ -142,6 +142,46 @@ public class PlayerController : MonoBehaviour
         yield return new WaitUntil(() => SceneManager.GetSceneByName(Name).isLoaded);
     }
 
+    public void UpdateHeartDisplay()
+    {
+        for (int i = 0; i < hearts.Length; i++)
+        {
+            if (i < CountActiveHearts())
+            {
+                hearts[i].SetActive(true);
+            }
+            else
+            {
+                hearts[i].SetActive(false);
+            }
+        }
+    }
+
+    public void RemoveHeart()
+    {
+        for (int i = hearts.Length - 1; i >= 0; i--)
+        {
+            if (hearts[i].activeSelf)
+            {
+                hearts[i].SetActive(false);
+                break;
+            }
+        }
+    }
+
+    int CountActiveHearts()
+    {
+        int activeHearts = 0;
+        foreach (GameObject heart in hearts)
+        {
+            if (heart.activeSelf)
+            {
+                activeHearts++;
+            }
+        }
+        return activeHearts;
+    }
+
     public void tekan_kiri()
     {
         Button_kiri = true; // Ketika ditekan
@@ -162,9 +202,13 @@ public class PlayerController : MonoBehaviour
         Button_kanan = false; // Ketika dilepas
     }
 
-    public void tekan_lompat()
+    public void tekan_atas()
     {
-        Jump();
+        Button_atas = true;
     }
 
+    public void lepas_atas()
+    {
+        Button_atas = false;
+    }
 }

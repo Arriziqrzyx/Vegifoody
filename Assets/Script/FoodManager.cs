@@ -8,13 +8,12 @@ public class FoodManager : MonoBehaviour
 
     public TMP_Text timerText;
     public TMP_Text resultWinText;
-    public TMP_Text healthText;
+    public GameObject[] health;
     public GameObject winPanel;
     public GameObject losePanel;
     public Transform sayuranParent;
 
-    private int health = 5; // Set health awal
-    private float timer = 120f; // Timer diatur menjadi 2 menit
+    private float timer = 120f; 
     private bool gameActive = true;
     private const string HighScoreKey = "HighScore3";
 
@@ -34,29 +33,57 @@ public class FoodManager : MonoBehaviour
     {
         winPanel.SetActive(false);
         losePanel.SetActive(false);
-        UpdateHealthUI(); // Update tampilan health
         StartCoroutine(StartTimer());
     }
 
     public void UpdateHealth(int value)
     {
-        health += value;
-        UpdateHealthUI();
+        for (int i = 0; i < Mathf.Abs(value); i++)
+        {
+            if (value < 0)
+            {
+                // Kurangi nyawa
+                RemoveHealth();
+            }
+        }
 
-        if (health <= 0)
+        if (CountActiveHealth() <= 0)
         {
             GameLose();
         }
     }
 
-    private void UpdateHealthUI()
+    private void RemoveHealth()
     {
-        healthText.text = "Health: " + health.ToString();
+        for (int i = health.Length - 1; i >= 0; i--)
+        {
+            if (health[i].activeSelf)
+            {
+                health[i].SetActive(false);
+                break;
+            }
+        }
     }
 
-    private bool AllSayuranCollected()
+    private int CountActiveHealth()
     {
-        return sayuranParent.childCount == 1;
+        int activeCount = 0;
+        foreach (GameObject heart in health)
+        {
+            if (heart.activeSelf)
+            {
+                activeCount++;
+            }
+        }
+        return activeCount;
+    }
+
+    private void Update()
+    {
+        if (sayuranParent.childCount == 0)
+        {
+            GameWin();
+        }
     }
 
     private void GameWin()
@@ -65,7 +92,6 @@ public class FoodManager : MonoBehaviour
         winPanel.SetActive(true);
         int finalScore = CalculateFinalScore();
 
-        // Simpan skor tertinggi jika lebih besar
         int highScore = PlayerPrefs.GetInt(HighScoreKey, 0);
         if (finalScore > highScore)
         {
@@ -102,20 +128,37 @@ public class FoodManager : MonoBehaviour
 
     private void UpdateTimerUI()
     {
-        timerText.text = "Waktu: " + Mathf.Ceil(timer).ToString() + "s";
+        timerText.text = Mathf.Ceil(timer).ToString();
+
+        // Ubah warna teks berdasarkan waktu yang tersisa
+        if (timer < 30)
+        {
+            timerText.color = Color.red;
+        }
+        else if (timer < 60)
+        {
+            timerText.color = Color.yellow;
+        }
+        else
+        {
+            timerText.color = Color.white; // Warna default
+        }
     }
 
     private int CalculateFinalScore()
     {
-        float timeRemainingPercentage = (timer / 120f) * 100;
-        return Mathf.RoundToInt(timeRemainingPercentage);
+        float timeRemainingPercentage = (timer / 100f) * 100;
+        int finalScore = Mathf.RoundToInt(timeRemainingPercentage);
+        return Mathf.Min(finalScore, 100); 
     }
 
-    public void SayuranCollected()
+    public void ReduceTimer(float amount)
     {
-        if (AllSayuranCollected())
+        timer -= amount;
+        if (timer < 0)
         {
-            GameWin();
+            timer = 0;
         }
+        UpdateTimerUI();
     }
 }

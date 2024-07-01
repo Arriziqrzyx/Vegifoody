@@ -3,6 +3,7 @@ using TMPro;
 using System.Collections;
 using UnityEngine.UI;
 
+
 public class DialogAlok : MonoBehaviour
 {
     public TextMeshProUGUI dialogText; 
@@ -22,14 +23,14 @@ public class DialogAlok : MonoBehaviour
         "Kebun ajaib itu memang benar-benar ada. Tapi tidak seharusnya kamu pergi sendirian. Di luar sana banyak sekali rintangan yang akan kamu hadapi.",
         "Tidak masalah. Aku siap.",
         "Wah kamu sangat berani sekali. Karena kamu punya semangat yang tinggi, ini aku beri hadiah. Mungkin ini akan berguna untuk petualangan kamu.",
-        "Anjay sebuah materi pelajaran tentang sayuran. Terima kasih Alok, aku janji aku akan mempelajarinya.",
+        "Wah keren! sebuah materi pelajaran tentang sayuran. Terima kasih Alok, aku janji aku akan mempelajarinya.",
         "Sama-sama. Hati-hati dalam perjalanan kamu selanjutnya. Semoga berhasil. Dan jangan lupa pelajari materi sayuran ini."
     };
 
     private GameObject[] avatars; 
     private PlayerController playerController;
     private int messageIndex = 0;
-    private bool isTyping = false; 
+    // private bool isTyping = false; 
 
     private void Start()
     {
@@ -49,7 +50,7 @@ public class DialogAlok : MonoBehaviour
 
         while (messageIndex < messages.Length)
         {
-            isTyping = true;
+            // isTyping = true;
             dialogText.text = ""; 
             avatars[messageIndex].SetActive(true); 
 
@@ -61,7 +62,7 @@ public class DialogAlok : MonoBehaviour
             }
             typingAudioSource.Stop();
             
-            isTyping = false;
+            // isTyping = false;
 
             yield return new WaitForSeconds(messageDelay); 
 
@@ -80,11 +81,10 @@ public class DialogAlok : MonoBehaviour
 
     public void OnButtonClick()
     {
-        
         playerController.enabled = true;
-        Destroy(alokObject);
-
-        
+        alokObject.GetComponent<SpriteRenderer>().enabled = false;
+        alokObject.GetComponent<BoxCollider2D>().enabled = false;
+        alokObject.GetComponent<CapsuleCollider2D>().enabled = false;
         gameObject.SetActive(false); 
     }
 }

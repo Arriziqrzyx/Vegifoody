@@ -10,11 +10,10 @@ public class CreditTextDisplay : MonoBehaviour
     {
         "Setelah melewati berbagai rintangan dan tantangan, Budi akhirnya berhasil mengumpulkan semua sayuran sehat di kebun ajaib.",
         "Sayuran-sehat itu tidak hanya memberikan kekuatan, tetapi juga wawasan baru tentang pentingnya kesehatan dan gizi.",
-        "Dengan ketekunan dan ketelitiannya, dia mampu menyelesaikan ujian dari Skibidi dan mendapatkan kepercayaan dari Alok.",
+        "Dengan ketekunan dan ketelitiannya, dia mampu menyelesaikan ujian dari Mewing & Skibidi dan mendapatkan kepercayaan dari Alok.",
         "Alok, Mewing, dan Skibidi tersenyum bangga melihat perjuangan Budi. Kebun ajaib kini menjadi tempat yang lebih hidup dan harmonis berkat usaha keras Budi serta kehadiran sayuran-sehat yang membawa energi baru.",
         "Di akhir petualangannya, Budi belajar bahwa dengan kerja keras, keberanian, dan ketekunan, tidak ada rintangan yang terlalu besar untuk diatasi.",
-        "Sayuran-sehat mengajarkan bahwa kesabaran dan perawatan yang baik menghasilkan hasil yang luar biasa.",
-        "Kebun ajaib pun kini menjadi simbol keberhasilan dan ketekunan, yang akan selalu menginspirasi Budi dalam setiap langkah kehidupannya, sambil selalu mengingat pesan penting dari sayuran-sehat: kekuatan terletak dalam keberanian dan perawatan yang tulus.",
+        "Kebun ajaib pun kini menjadi simbol keberhasilan dan ketekunan, yang akan selalu menginspirasi Budi dalam setiap langkah kehidupannya.",
         ".............................T  A  M  A  T............................."
     };
 

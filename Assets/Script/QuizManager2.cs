@@ -21,6 +21,8 @@ public class QuizManager2 : MonoBehaviour
     [SerializeField] AudioSource benarAudio;
     [SerializeField] AudioSource SalahAudio;
     private const string HighScoreKey = "HighScore2";
+    private GameObject targetObject;
+    private ImageTransparencyController targetScript;
 
     private void Start()
     {
@@ -28,6 +30,20 @@ public class QuizManager2 : MonoBehaviour
         correctAnswersCount = 0;
         UpdateCorrectAnswersUI();
         LoadQuestion(currentQuestionIndex);
+
+        targetObject = GameObject.FindWithTag("CrossFadePlat");
+        if (targetObject != null)
+        {
+            targetScript = targetObject.GetComponent<ImageTransparencyController>();
+            if (targetScript == null)
+            {
+                Debug.LogError("ImageTransparencyController tidak ditemukan pada GameObject dengan tag 'CrossFadePlat'.");
+            }
+        }
+        else
+        {
+            Debug.LogError("GameObject dengan tag 'CrossFadePlat' tidak ditemukan.");
+        }
     }
 
     private void LoadQuestion(int questionIndex)
@@ -83,12 +99,12 @@ public class QuizManager2 : MonoBehaviour
         if (correctAnswersCount >= 5)
         {
             successPanel.SetActive(true);
-            resultWinText.text = $"Skor: {score}";
+            resultWinText.text = score.ToString();
         }
         else
         {
             failPanel.SetActive(true);
-            resultLoseText.text = $"Skor: {score}";
+            resultLoseText.text = score.ToString();
         }
     }
 
@@ -100,11 +116,29 @@ public class QuizManager2 : MonoBehaviour
 
     public void PlayAgain()
     {
+        SceneManager.UnloadSceneAsync(Scene);
         StartCoroutine(LoadGame(Scene));
     }
 
-    public void BackToGameplay()
+    public void DelayedSceneLoader()
     {
+        StartCoroutine(DelayAndLoad());
+    }
+
+    private IEnumerator DelayAndLoad()
+    {
+        yield return new WaitForSeconds(2.5f);
+
+        BackToGameplay();
+    }
+
+    private void BackToGameplay()
+    {
+        if (targetScript != null)
+        {
+            targetScript.Start();
+            Debug.Log("cross start success");
+        }
         SceneManager.UnloadSceneAsync(Scene);
     }
 
