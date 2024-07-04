@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] AudioSource dieAudio;
     [SerializeField] AudioSource checkpointAudio;
     [SerializeField] AudioSource hatiAudio;
+    [SerializeField] AudioSource typingAudio;
     private bool Button_kiri; 
     private bool Button_kanan;
     private bool Button_atas; 
@@ -52,7 +53,7 @@ public class PlayerController : MonoBehaviour
             anim.SetBool("Run", false);
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) || Button_atas)
+        if (Input.GetKeyDown(KeyCode.W) || Button_atas)
         {
             Jump();
         }

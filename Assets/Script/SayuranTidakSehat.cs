@@ -10,6 +10,7 @@ public class SayuranTidakSehat : MonoBehaviour
         if (FoodManager.Instance != null)
         {
             pencetAudio.Play();
+            Debug.Log("wuuu");
             FoodManager.Instance.UpdateHealth(-1); // Kurangi kesehatan
             FoodManager.Instance.ReduceTimer(5f);
         }

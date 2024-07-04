@@ -150,7 +150,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -8024479509341416953, guid: db5360c4e7941e54eb4387bbb946e750, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 39f01fe69cd14344faa66e3c6c288bc4, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 50c68f3badfca23409e4eb3b7d037884, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -243,13 +243,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4550058}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 1.1982031, y: 0.14597465, z: 92.62142}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4550061
 MonoBehaviour:
@@ -932,7 +932,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &197213007
 MonoBehaviour:
@@ -2241,7 +2241,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 747390520}
-  - component: {fileID: 747390519}
   m_Layer: 0
   m_Name: SFX
   m_TagString: Untagged
@@ -2249,22 +2248,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &747390519
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 747390518}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3475a44515d191c458fe17d115f7676d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioMixer: {fileID: 24100000, guid: db5360c4e7941e54eb4387bbb946e750, type: 2}
-  masterVolume: {fileID: 1312504233}
-  BGM: {fileID: 430635852}
-  SFX: {fileID: 1663155297}
 --- !u!4 &747390520
 Transform:
   m_ObjectHideFlags: 0
@@ -2420,7 +2403,6 @@ GameObject:
   - component: {fileID: 789022821}
   - component: {fileID: 789022823}
   - component: {fileID: 789022822}
-  - component: {fileID: 789022824}
   m_Layer: 5
   m_Name: Ujian1
   m_TagString: Untagged
@@ -2545,18 +2527,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 789022820}
   m_CullTransparentMesh: 1
---- !u!114 &789022824
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 789022820}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 290864a85ed1e7a4fb84c699c6792465, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &819011994
 GameObject:
   m_ObjectHideFlags: 0
@@ -4322,6 +4292,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d0983097c0e1e44aa0def09afbdfdd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioMixer: {fileID: 0}
 --- !u!1 &2064874438
 GameObject:
   m_ObjectHideFlags: 0

@@ -3,17 +3,17 @@ using TMPro;
 using System.Collections;
 using UnityEngine.UI;
 
-
 public class DialogAlok : MonoBehaviour
 {
-    public TextMeshProUGUI dialogText; 
-    public GameObject budiAvatar; 
-    public GameObject alokAvatar; 
-    public float typingSpeed = 0.05f; 
-    public float initialDelay = 0.5f; 
-    public float messageDelay = 1.5f; 
-    public GameObject button; 
-    public GameObject alokObject; 
+    public TextMeshProUGUI dialogText;
+    public GameObject budiAvatar;
+    public GameObject alokAvatar;
+    public float typingSpeed = 0.05f;
+    public float initialDelay = 0.5f;
+    public float messageDelay = 1.5f;
+    public GameObject button;
+    public GameObject buttonSkip;
+    public GameObject alokObject;
     public AudioSource typingAudioSource;
 
     private string[] messages = new string[]
@@ -27,32 +27,37 @@ public class DialogAlok : MonoBehaviour
         "Sama-sama. Hati-hati dalam perjalanan kamu selanjutnya. Semoga berhasil. Dan jangan lupa pelajari materi sayuran ini."
     };
 
-    private GameObject[] avatars; 
+    private GameObject[] avatars;
     private PlayerController playerController;
     private int messageIndex = 0;
-    // private bool isTyping = false; 
+    private const string dialog1Key = "Dialog1Passed"; // Key untuk PlayerPrefs
 
     private void Start()
     {
-        dialogText.text = ""; 
-        button.SetActive(false); 
-        playerController = FindObjectOfType<PlayerController>(); 
+        dialogText.text = "";
+        button.SetActive(false);
+        buttonSkip.SetActive(false);
+        playerController = FindObjectOfType<PlayerController>();
 
-        
         avatars = new GameObject[] { alokAvatar, budiAvatar, alokAvatar, budiAvatar, alokAvatar, budiAvatar, alokAvatar };
 
+        // Cek PlayerPrefs untuk status dialog
+        if (PlayerPrefs.GetInt(dialog1Key, 0) == 1)
+        {
+            buttonSkip.SetActive(true); // Jika dialog sudah pernah dilakukan, aktifkan tombol skip
+        }
+        
         StartCoroutine(StartDialog());
     }
 
     private IEnumerator StartDialog()
     {
-        yield return new WaitForSeconds(initialDelay); 
+        yield return new WaitForSeconds(initialDelay);
 
         while (messageIndex < messages.Length)
         {
-            // isTyping = true;
-            dialogText.text = ""; 
-            avatars[messageIndex].SetActive(true); 
+            dialogText.text = "";
+            avatars[messageIndex].SetActive(true);
 
             typingAudioSource.Play();
             foreach (char letter in messages[messageIndex].ToCharArray())
@@ -61,30 +66,39 @@ public class DialogAlok : MonoBehaviour
                 yield return new WaitForSeconds(typingSpeed);
             }
             typingAudioSource.Stop();
-            
-            // isTyping = false;
 
-            yield return new WaitForSeconds(messageDelay); 
+            yield return new WaitForSeconds(messageDelay);
 
-            
             if (messageIndex < messages.Length - 1)
             {
-                avatars[messageIndex].SetActive(false); 
+                avatars[messageIndex].SetActive(false);
             }
 
             messageIndex++;
         }
 
-        
         button.SetActive(true);
     }
 
     public void OnButtonClick()
     {
+        // Simpan status dialog ke PlayerPrefs
+        PlayerPrefs.SetInt(dialog1Key, 1);
+
         playerController.enabled = true;
         alokObject.GetComponent<SpriteRenderer>().enabled = false;
         alokObject.GetComponent<BoxCollider2D>().enabled = false;
         alokObject.GetComponent<CapsuleCollider2D>().enabled = false;
-        gameObject.SetActive(false); 
+        gameObject.SetActive(false);
+    }
+
+    public void ButtonSkip()
+    {
+        playerController.enabled = true;
+        alokObject.GetComponent<SpriteRenderer>().enabled = false;
+        alokObject.GetComponent<BoxCollider2D>().enabled = false;
+        alokObject.GetComponent<CapsuleCollider2D>().enabled = false;
+        gameObject.SetActive(false);
+        typingAudioSource.Stop();
     }
 }

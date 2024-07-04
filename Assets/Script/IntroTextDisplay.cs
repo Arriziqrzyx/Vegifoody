@@ -1,6 +1,8 @@
 using UnityEngine;
 using TMPro;
 using System.Collections;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class IntroTextDisplay : MonoBehaviour
 {
@@ -16,9 +18,22 @@ public class IntroTextDisplay : MonoBehaviour
     };
     public float typingSpeed = 0.05f;
     public float fadeDuration = 1.0f;
+    public GameObject buttonSkip;
+    private const string dialogIntroKey = "DialogIntroPassed"; // Key untuk PlayerPrefs
+
+    private Coroutine currentTypingCoroutine;
+    private bool skipTyping = false;
 
     private void Start()
     {
+        buttonSkip.SetActive(false);
+
+        // Cek PlayerPrefs untuk status dialog
+        if (PlayerPrefs.GetInt(dialogIntroKey, 0) == 1)
+        {
+            buttonSkip.SetActive(true); // Jika dialog sudah pernah dilakukan, aktifkan tombol skip
+        }
+
         StartCoroutine(DisplayStoryText());
     }
 
@@ -35,12 +50,21 @@ public class IntroTextDisplay : MonoBehaviour
 
         foreach (string storyText in storyTexts)
         {
-            yield return StartCoroutine(TypeText(storyText));
+            if (skipTyping)
+            {
+                introText.text = storyText;
+                break;
+            }
+
+            currentTypingCoroutine = StartCoroutine(TypeText(storyText));
+            yield return currentTypingCoroutine;
             yield return new WaitForSeconds(1.0f);
         }
 
         yield return StartCoroutine(FadeCanvasGroup(canvasGroup, 1, 0, fadeDuration));
 
+        // Simpan status dialog ke PlayerPrefs
+        PlayerPrefs.SetInt(dialogIntroKey, 1);
         UnityEngine.SceneManagement.SceneManager.LoadScene("2D Platformer");
     }
 
@@ -53,6 +77,13 @@ public class IntroTextDisplay : MonoBehaviour
 
         foreach (char letter in text.ToCharArray())
         {
+            if (skipTyping)
+            {
+                introText.text = text;
+                typingAudioSource.Stop();
+                yield break;
+            }
+
             introText.text += letter;
             yield return new WaitForSeconds(typingSpeed);
         }
@@ -73,5 +104,34 @@ public class IntroTextDisplay : MonoBehaviour
         }
 
         canvasGroup.alpha = endAlpha;
+    }
+
+    public void SceneLoad(string sceneName)
+    {
+        skipTyping = true;
+
+        if (currentTypingCoroutine != null)
+        {
+            StopCoroutine(currentTypingCoroutine);
+            introText.text = storyTexts[storyTexts.Length - 1];
+            typingAudioSource.Stop();
+        }
+
+        Button buttonComponent = buttonSkip.GetComponent<Button>();
+
+            // Memeriksa apakah GameObject memiliki komponen Button
+            if (buttonComponent != null)
+            {
+                // Hapus komponen Button dari GameObject
+                Destroy(buttonComponent);
+            }
+
+        StartCoroutine(LoadSceneDelayed(sceneName));
+    }
+
+    private IEnumerator LoadSceneDelayed(string sceneName)
+    {
+        yield return new WaitForSeconds(2.5f); // Tunggu selama 2.5 detik
+        SceneManager.LoadScene(sceneName); // Muat scene dengan nama yang diberikan
     }
 }

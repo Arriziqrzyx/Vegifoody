@@ -12,6 +12,7 @@ public class DialogFound : MonoBehaviour
     public float initialDelay = 0.5f; 
     public float messageDelay = 1.5f; 
     public GameObject button; 
+    public GameObject buttonSkip; 
     public AudioSource typingAudioSource;
 
     private string[] messages = new string[]
@@ -29,15 +30,21 @@ public class DialogFound : MonoBehaviour
 
     private GameObject[] avatars; 
     private int messageIndex = 0;
-    // private bool isTyping = false; 
+    private const string dialog6Key = "Dialog6Passed";
 
     private void Start()
     {
         dialogText.text = ""; 
         button.SetActive(false); 
+        buttonSkip.SetActive(false); 
         
         avatars = new GameObject[] { alokAvatar, budiAvatar, alokAvatar, alokAvatar, budiAvatar, alokAvatar, budiAvatar };
         
+        if (PlayerPrefs.GetInt(dialog6Key, 0) == 1)
+        {
+            buttonSkip.SetActive(true); // Jika dialog sudah pernah dilakukan, aktifkan tombol skip
+        }
+
         StartCoroutine(StartDialog());
     }
 
@@ -77,7 +84,11 @@ public class DialogFound : MonoBehaviour
     }
 
     public void OnButtonClick()
-    {        
-        gameObject.SetActive(false); 
+    {
+        PlayerPrefs.SetInt(dialog6Key, 1);
+    }
+    public void ButtonSkip()
+    {
+        typingAudioSource.Stop();
     }
 }

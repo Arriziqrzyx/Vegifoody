@@ -33,6 +33,12 @@ public class FoodManager : MonoBehaviour
     {
         winPanel.SetActive(false);
         losePanel.SetActive(false);
+        StartCoroutine(StartGameAfterDelay());
+    }
+
+    private IEnumerator StartGameAfterDelay()
+    {
+        yield return new WaitForSeconds(3f); // Menunggu 3 detik
         StartCoroutine(StartTimer());
     }
 

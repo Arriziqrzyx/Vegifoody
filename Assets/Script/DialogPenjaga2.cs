@@ -12,6 +12,7 @@ public class DialogPenjaga2 : MonoBehaviour
     public float initialDelay = 0.5f; 
     public float messageDelay = 1.5f; 
     public GameObject button; 
+    public GameObject buttonSkip; 
     public GameObject skibidiObject; 
     public AudioSource typingAudioSource;
 
@@ -36,16 +37,22 @@ public class DialogPenjaga2 : MonoBehaviour
     private GameObject[] avatars; 
     private PlayerController playerController;
     private int messageIndex = 0;
-    // private bool isTyping = false; 
+    private const string dialog4Key = "Dialog4Passed"; // Key untuk PlayerPrefs
 
     private void Start()
     {
         dialogText.text = ""; 
         button.SetActive(false); 
+        buttonSkip.SetActive(false); 
         playerController = FindObjectOfType<PlayerController>(); 
 
         
         avatars = new GameObject[] { budiAvatar, skibidiAvatar, budiAvatar, skibidiAvatar, budiAvatar, skibidiAvatar, budiAvatar, skibidiAvatar, budiAvatar, skibidiAvatar, budiAvatar, skibidiAvatar };
+
+        if (PlayerPrefs.GetInt(dialog4Key, 0) == 1)
+        {
+            buttonSkip.SetActive(true); // Jika dialog sudah pernah dilakukan, aktifkan tombol skip
+        }
 
         StartCoroutine(StartDialog());
     }
@@ -56,7 +63,7 @@ public class DialogPenjaga2 : MonoBehaviour
 
         while (messageIndex < messages.Length)
         {
-            // isTyping = true;
+            
             dialogText.text = ""; 
             avatars[messageIndex].SetActive(true); 
 
@@ -68,7 +75,6 @@ public class DialogPenjaga2 : MonoBehaviour
             }
             typingAudioSource.Stop();
 
-            // isTyping = false;
 
             yield return new WaitForSeconds(messageDelay); 
 
@@ -87,9 +93,20 @@ public class DialogPenjaga2 : MonoBehaviour
 
     public void OnButtonClick()
     {
+        PlayerPrefs.SetInt(dialog4Key, 1);
+
         playerController.enabled = true;
         skibidiObject.GetComponent<SpriteRenderer>().enabled = false;
         skibidiObject.GetComponent<BoxCollider2D>().enabled = false;
         gameObject.SetActive(false);  
+    }
+
+    public void ButtonSkip()
+    {
+        playerController.enabled = true;
+        skibidiObject.GetComponent<SpriteRenderer>().enabled = false;
+        skibidiObject.GetComponent<BoxCollider2D>().enabled = false;
+        gameObject.SetActive(false);  
+        typingAudioSource.Stop();
     }
 }

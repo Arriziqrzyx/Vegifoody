@@ -892,6 +892,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 6469674587903452968}
+        m_TargetAssemblyTypeName: ImageTransparencyController, Assembly-CSharp
+        m_MethodName: ResetTransparency
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &124020904
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2438,7 +2450,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 100
+  m_text: 120
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 27d1acba8ffd0bb4988c895ab3adfbd6, type: 2}
   m_sharedMaterial: {fileID: -8191812527399782441, guid: 27d1acba8ffd0bb4988c895ab3adfbd6, type: 2}
@@ -4179,7 +4191,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 6469674587903452968}
-        m_TargetAssemblyTypeName: ImageTransparencyController2, Assembly-CSharp
+        m_TargetAssemblyTypeName: ImageTransparencyController, Assembly-CSharp
         m_MethodName: ResetTransparency
         m_Mode: 1
         m_Arguments:
@@ -4535,6 +4547,7 @@ GameObject:
   - component: {fileID: 1785039173}
   - component: {fileID: 1785039174}
   - component: {fileID: 1785039175}
+  - component: {fileID: 1785039176}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -4592,6 +4605,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d0983097c0e1e44aa0def09afbdfdd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioMixer: {fileID: 0}
 --- !u!82 &1785039175
 AudioSource:
   m_ObjectHideFlags: 0
@@ -4688,6 +4702,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1785039176
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1785039170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eac66a951b3bb8c4c82aacc7413bcb95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttons:
+  - {fileID: 124020901}
+  - {fileID: 1946408405}
 --- !u!1 &1790809055
 GameObject:
   m_ObjectHideFlags: 0
@@ -5287,6 +5316,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1785039175}
         m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
         m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6469674587903452968}
+        m_TargetAssemblyTypeName: ImageTransparencyController, Assembly-CSharp
+        m_MethodName: ResetTransparency
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6141,10 +6182,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 6469674587903452967}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f28ae89fa672a64ea860856ba291b3d, type: 3}
+  m_Script: {fileID: 11500000, guid: c63756356369b5d42a69756983af09a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   imageToFade: {fileID: 6469674587903452960}
+  fadeDuration: 1
 --- !u!222 &8277032420519495840
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -12,6 +12,7 @@ public class DialogAlok3 : MonoBehaviour
     public float initialDelay = 0.5f; 
     public float messageDelay = 1.5f; 
     public GameObject button; 
+    public GameObject buttonSkip; 
     public GameObject alokObject;
     public AudioSource typingAudioSource; 
     private string[] messages = new string[]
@@ -31,16 +32,22 @@ public class DialogAlok3 : MonoBehaviour
     private GameObject[] avatars; 
     private PlayerController2 playerController2;
     private int messageIndex = 0;
-    // private bool isTyping = false; 
+    private const string dialog5Key = "Dialog5Passed"; // Key untuk PlayerPrefs
 
     private void Start()
     {
         dialogText.text = ""; 
         button.SetActive(false); 
+        buttonSkip.SetActive(false); 
         playerController2 = FindObjectOfType<PlayerController2>(); 
 
         
         avatars = new GameObject[] { alokAvatar, budiAvatar, alokAvatar, budiAvatar, alokAvatar, budiAvatar, alokAvatar, budiAvatar, alokAvatar };
+
+        if (PlayerPrefs.GetInt(dialog5Key, 0) == 1)
+        {
+            buttonSkip.SetActive(true); // Jika dialog sudah pernah dilakukan, aktifkan tombol skip
+        }
 
         StartCoroutine(StartDialog());
     }
@@ -82,9 +89,19 @@ public class DialogAlok3 : MonoBehaviour
 
     public void OnButtonClick()
     {
+        PlayerPrefs.SetInt(dialog5Key, 1);
+
         playerController2.enabled = true;
         alokObject.GetComponent<SpriteRenderer>().enabled = false;
         alokObject.GetComponent<BoxCollider2D>().enabled = false;
         gameObject.SetActive(false);  
+    }
+    public void ButtonSkip()
+    {
+        playerController2.enabled = true;
+        alokObject.GetComponent<SpriteRenderer>().enabled = false;
+        alokObject.GetComponent<BoxCollider2D>().enabled = false;
+        gameObject.SetActive(false);  
+        typingAudioSource.Stop();
     }
 }

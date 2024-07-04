@@ -12,6 +12,7 @@ public class DialogPenjaga1 : MonoBehaviour
     public float initialDelay = 0.5f; 
     public float messageDelay = 1.5f; 
     public GameObject button; 
+    public GameObject buttonSkip;
     public GameObject mewingObject; 
     public AudioSource typingAudioSource;
 
@@ -32,15 +33,22 @@ public class DialogPenjaga1 : MonoBehaviour
     private PlayerController playerController;
     private int messageIndex = 0;
     // private bool isTyping = false; 
+    private const string dialog2Key = "Dialog2Passed"; // Key untuk PlayerPrefs
 
     private void Start()
     {
         dialogText.text = ""; 
         button.SetActive(false); 
+        buttonSkip.SetActive(false); 
         playerController = FindObjectOfType<PlayerController>(); 
 
         
         avatars = new GameObject[] { mewingAvatar, budiAvatar, mewingAvatar, budiAvatar, mewingAvatar, budiAvatar, mewingAvatar, budiAvatar, mewingAvatar };
+
+        if (PlayerPrefs.GetInt(dialog2Key, 0) == 1)
+        {
+            buttonSkip.SetActive(true); // Jika dialog sudah pernah dilakukan, aktifkan tombol skip
+        }
 
         StartCoroutine(StartDialog());
     }
@@ -82,9 +90,20 @@ public class DialogPenjaga1 : MonoBehaviour
 
     public void OnButtonClick()
     {
+        PlayerPrefs.SetInt(dialog2Key, 1);
+
         playerController.enabled = true;
         mewingObject.GetComponent<SpriteRenderer>().enabled = false;
         mewingObject.GetComponent<BoxCollider2D>().enabled = false;
         gameObject.SetActive(false);  
+    }
+
+    public void ButtonSkip()
+    {
+        playerController.enabled = true;
+        mewingObject.GetComponent<SpriteRenderer>().enabled = false;
+        mewingObject.GetComponent<BoxCollider2D>().enabled = false;
+        gameObject.SetActive(false);
+        typingAudioSource.Stop();
     }
 }

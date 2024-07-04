@@ -12,6 +12,7 @@ public class DialogAlok2 : MonoBehaviour
     public float initialDelay = 0.5f; 
     public float messageDelay = 1.5f; 
     public GameObject button; 
+    public GameObject buttonSkip;
     public GameObject alokObject; 
     public AudioSource typingAudioSource;
 
@@ -34,13 +35,19 @@ public class DialogAlok2 : MonoBehaviour
 
     private PlayerController playerController;
     private int messageIndex = 0;
-    // private bool isTyping = false; 
+    private const string dialog3Key = "Dialog3Passed";
 
     private void Start()
     {
         dialogText.text = ""; 
         button.SetActive(false); 
+        buttonSkip.SetActive(false); 
         playerController = FindObjectOfType<PlayerController>(); 
+
+        if (PlayerPrefs.GetInt(dialog3Key, 0) == 1)
+        {
+            buttonSkip.SetActive(true);
+        }
 
         StartCoroutine(StartDialog());
     }
@@ -101,9 +108,20 @@ public class DialogAlok2 : MonoBehaviour
 
     public void OnButtonClick()
     {
+        PlayerPrefs.SetInt(dialog3Key, 1);
+
         playerController.enabled = true;
         alokObject.GetComponent<SpriteRenderer>().enabled = false;
         alokObject.GetComponent<BoxCollider2D>().enabled = false;
         gameObject.SetActive(false);  
+    }
+
+    public void ButtonSkip()
+    {
+        playerController.enabled = true;
+        alokObject.GetComponent<SpriteRenderer>().enabled = false;
+        alokObject.GetComponent<BoxCollider2D>().enabled = false;
+        gameObject.SetActive(false); 
+        typingAudioSource.Stop(); 
     }
 }
