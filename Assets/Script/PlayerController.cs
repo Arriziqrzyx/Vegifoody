@@ -212,4 +212,9 @@ public class PlayerController : MonoBehaviour
     {
         Button_atas = false;
     }
+
+    public void loncat()
+    {
+        Jump();
+    }
 }
