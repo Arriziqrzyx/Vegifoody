@@ -717,7 +717,7 @@ GameObject:
   - component: {fileID: 90772275}
   m_Layer: 6
   m_Name: Penjaga1
-  m_TagString: Untagged
+  m_TagString: NPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7218,7 +7218,7 @@ GameObject:
   - component: {fileID: 468195459}
   m_Layer: 6
   m_Name: NPCLabu1
-  m_TagString: Untagged
+  m_TagString: NPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8726,7 +8726,7 @@ GameObject:
   - component: {fileID: 602610854}
   m_Layer: 6
   m_Name: NPCLabu2
-  m_TagString: Untagged
+  m_TagString: NPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11601,7 +11601,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.22747627, y: 0.61702067}
+  m_Offset: {x: -0.22747627, y: 0.86358404}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -11612,7 +11612,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.14504749, y: 1.8582796}
+  m_Size: {x: 1.65, y: 2.351406}
   m_EdgeRadius: 0
 --- !u!95 &827373670
 Animator:
@@ -12584,7 +12584,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.22747627, y: 0.61702067}
+  m_Offset: {x: -0.22747627, y: 0.8289112}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -12595,7 +12595,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.14504749, y: 1.8582796}
+  m_Size: {x: 1.56, y: 2.2820604}
   m_EdgeRadius: 0
 --- !u!95 &889922179
 Animator:
@@ -31732,7 +31732,7 @@ GameObject:
   - component: {fileID: 1450297828}
   m_Layer: 6
   m_Name: Penjaga2
-  m_TagString: Untagged
+  m_TagString: NPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -31750,7 +31750,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.08254206, y: 0.0070312023}
+  m_Offset: {x: -0.0057137012, y: 2.5671668}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -31761,7 +31761,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 7.435031, y: 4.449137}
+  m_Size: {x: 7.611542, y: 9.569408}
   m_EdgeRadius: 0
 --- !u!114 &1450297829
 MonoBehaviour:
@@ -32993,7 +32993,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.22747627, y: 0.61702067}
+  m_Offset: {x: -0.22747627, y: 0.9956186}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -33004,7 +33004,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.14504749, y: 1.8582796}
+  m_Size: {x: 1.48, y: 2.7294621}
   m_EdgeRadius: 0
 --- !u!95 &1588900889
 Animator:
@@ -34580,7 +34580,6 @@ MonoBehaviour:
   dieAudio: {fileID: 1725053580}
   checkpointAudio: {fileID: 1725053579}
   hatiAudio: {fileID: 1725053578}
-  typingAudio: {fileID: 0}
 --- !u!70 &1725053577
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -36378,7 +36377,7 @@ GameObject:
   - component: {fileID: 2005971033}
   - component: {fileID: 2005971032}
   - component: {fileID: 2005971031}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Pintu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36879,7 +36878,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.22747627, y: 0.61702067}
+  m_Offset: {x: -0.20688415, y: 0.8481256}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -36890,7 +36889,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.14504749, y: 1.8582796}
+  m_Size: {x: 1.7237792, y: 2.4502332}
   m_EdgeRadius: 0
 --- !u!95 &2046087089
 Animator:

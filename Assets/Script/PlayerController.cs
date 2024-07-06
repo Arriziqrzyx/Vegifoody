@@ -23,10 +23,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] AudioSource dieAudio;
     [SerializeField] AudioSource checkpointAudio;
     [SerializeField] AudioSource hatiAudio;
-    [SerializeField] AudioSource typingAudio;
     private bool Button_kiri; 
     private bool Button_kanan;
     private bool Button_atas; 
+    private bool canJump = true;
+
 
     void Start()
     {
@@ -53,7 +54,7 @@ public class PlayerController : MonoBehaviour
             anim.SetBool("Run", false);
         }
 
-        if (Input.GetKeyDown(KeyCode.W) || Button_atas)
+        if ((Input.GetKeyDown(KeyCode.W) || Button_atas) && canJump)
         {
             Jump();
         }
@@ -100,11 +101,12 @@ public class PlayerController : MonoBehaviour
 
     void Jump()
     {
-        if (tanah)
+        if (tanah && canJump)
         {
             float x = lompat.velocity.x;
             lompat.velocity = new Vector2(x, kekuatanlompat);
             jumpAudio.Play();
+            canJump = false;
         }
     }
 
@@ -211,10 +213,6 @@ public class PlayerController : MonoBehaviour
     public void lepas_atas()
     {
         Button_atas = false;
-    }
-
-    public void loncat()
-    {
-        Jump();
+        canJump = true; // Set canJump menjadi true saat tombol dilepas
     }
 }

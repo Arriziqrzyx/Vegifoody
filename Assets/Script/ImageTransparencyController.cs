@@ -7,9 +7,13 @@ public class ImageTransparencyController : MonoBehaviour
     public Image imageToFade; // Assign image yang akan diubah transparansinya
     public float fadeDuration = 1.0f; // Durasi transisi dalam detik
     private Coroutine currentFadeCoroutine;
+    private PlayerController playerController;
+    private PlayerController2 playerController2;
 
     public void Start()
     {
+        playerController = FindObjectOfType<PlayerController>(); 
+        playerController2 = FindObjectOfType<PlayerController2>();
         SetImageAlpha(imageToFade, 1f);
         // Memulai coroutine untuk mengubah transparansi dari 1 ke 0
         StartCoroutine(FadeImage(imageToFade, 1f, 0f, fadeDuration));
@@ -45,6 +49,7 @@ public class ImageTransparencyController : MonoBehaviour
     public void ResetDelay()
     {
         StartCoroutine(DelayedReset());
+        imageToFade.raycastTarget = true;
     }
     
     private IEnumerator DelayedReset()
@@ -59,6 +64,15 @@ public class ImageTransparencyController : MonoBehaviour
         {
             StopCoroutine(currentFadeCoroutine);
         }
+        imageToFade.raycastTarget = true;
+        if (playerController != null)
+        {
+            playerController.enabled = false;
+        }
+        if (playerController2 != null)
+        {
+            playerController2.enabled = false;
+        }
         StartCoroutine(FadeAndReset());
     }
 
@@ -67,5 +81,14 @@ public class ImageTransparencyController : MonoBehaviour
         yield return FadeImage(imageToFade, imageToFade.color.a, 1f, 1.0f);
         yield return new WaitForSeconds(1.0f); 
         StartCoroutine(FadeImage(imageToFade, imageToFade.color.a, 0f, 0f));
+        imageToFade.raycastTarget = false;
+        if (playerController != null)
+        {
+            playerController.enabled = true;
+        }
+        if (playerController2 != null)
+        {
+            playerController2.enabled = true;
+        }
     }
 }

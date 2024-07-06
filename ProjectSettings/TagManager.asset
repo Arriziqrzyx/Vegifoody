@@ -9,6 +9,7 @@ TagManager:
   - SayuranSehat
   - HatiHati
   - CrossFadePlat
+  - NPC
   layers:
   - Default
   - TransparentFX
