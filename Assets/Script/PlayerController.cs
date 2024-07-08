@@ -57,6 +57,7 @@ public class PlayerController : MonoBehaviour
         if ((Input.GetKeyDown(KeyCode.W) || Button_atas) && canJump)
         {
             Jump();
+            canJump = true;
         }
 
         if ((pindah > 0 && !balik) || (pindah < 0 && balik))
