@@ -7,22 +7,14 @@ using UnityEngine.UI;
 public class IntroTextDisplay : MonoBehaviour
 {
     public TextMeshProUGUI introText;
-    public AudioSource typingAudioSource; // Referensi ke AudioSource
-
-    private string[] storyTexts = new string[]
-    {
-        "Di sebuah desa kecil yang damai bernama Sayuria, hiduplah seorang anak bernama Budi yang sangat suka bermain di luar rumah.",
-        "Suatu hari, Budi mendengar cerita dari neneknya tentang Kebun Ajaib yang penuh dengan sayuran lezat dan bergizi.",
-        "Nenek Budi bercerita bahwa siapa pun yang bisa menemukan semua sayuran di Kebun Ajaib akan menjadi kuat dan sehat.",
-        "Penasaran dengan cerita neneknya, Budi memutuskan untuk mencari Kebun Ajaib."
-    };
-    public float typingSpeed = 0.05f;
     public float fadeDuration = 1.0f;
+    public float[] displayDurations; // Durasi setiap kalimat ditampilkan diatur melalui Inspector
+    public string[] storyTexts; // Kalimat-kalimat yang akan ditampilkan diatur melalui Inspector
     public GameObject buttonSkip;
     private const string dialogIntroKey = "DialogIntroPassed"; // Key untuk PlayerPrefs
 
-    private Coroutine currentTypingCoroutine;
-    private bool skipTyping = false;
+    private Coroutine currentFadeCoroutine;
+    private bool isSkipped = false;
 
     private void Start()
     {
@@ -46,50 +38,37 @@ public class IntroTextDisplay : MonoBehaviour
             canvasGroup = introText.gameObject.AddComponent<CanvasGroup>();
         }
 
-        yield return StartCoroutine(FadeCanvasGroup(canvasGroup, 0, 1, fadeDuration));
-
-        foreach (string storyText in storyTexts)
+        for (int i = 0; i < storyTexts.Length; i++)
         {
-            if (skipTyping)
+            if (isSkipped)
             {
-                introText.text = storyText;
                 break;
             }
 
-            currentTypingCoroutine = StartCoroutine(TypeText(storyText));
-            yield return currentTypingCoroutine;
-            yield return new WaitForSeconds(1.0f);
+            string storyText = storyTexts[i];
+            float displayDuration = displayDurations[i];
+
+            // Set the text and fade in
+            introText.text = storyText;
+            yield return StartCoroutine(FadeCanvasGroup(canvasGroup, 0, 1, fadeDuration));
+
+            // Wait for the display duration minus fade durations
+            yield return new WaitForSeconds(displayDuration);
+
+            // Fade out
+            yield return StartCoroutine(FadeCanvasGroup(canvasGroup, 1, 0, fadeDuration));
         }
 
-        yield return StartCoroutine(FadeCanvasGroup(canvasGroup, 1, 0, fadeDuration));
+        if (isSkipped)
+        {
+            introText.text = "Penasaran dengan cerita neneknya, Budi memutuskan untuk mencari Kebun Ajaib.";
+            yield return StartCoroutine(FadeCanvasGroup(canvasGroup, 0, 1, fadeDuration));
+            yield return new WaitForSeconds(displayDurations[displayDurations.Length - 1]);
+        }
 
         // Simpan status dialog ke PlayerPrefs
         PlayerPrefs.SetInt(dialogIntroKey, 1);
-        UnityEngine.SceneManagement.SceneManager.LoadScene("2D Platformer");
-    }
-
-    private IEnumerator TypeText(string text)
-    {
-        introText.text = "";
-
-        // Mulai memutar audio typing
-        typingAudioSource.Play();
-
-        foreach (char letter in text.ToCharArray())
-        {
-            if (skipTyping)
-            {
-                introText.text = text;
-                typingAudioSource.Stop();
-                yield break;
-            }
-
-            introText.text += letter;
-            yield return new WaitForSeconds(typingSpeed);
-        }
-
-        // Hentikan audio typing saat selesai mengetik
-        typingAudioSource.Stop();
+        SceneManager.LoadScene("2D Platformer");
     }
 
     private IEnumerator FadeCanvasGroup(CanvasGroup canvasGroup, float startAlpha, float endAlpha, float duration)
@@ -108,23 +87,19 @@ public class IntroTextDisplay : MonoBehaviour
 
     public void SceneLoad(string sceneName)
     {
-        skipTyping = true;
-
-        if (currentTypingCoroutine != null)
+        if (currentFadeCoroutine != null)
         {
-            StopCoroutine(currentTypingCoroutine);
-            introText.text = storyTexts[storyTexts.Length - 1];
-            typingAudioSource.Stop();
+            StopCoroutine(currentFadeCoroutine);
         }
 
         Button buttonComponent = buttonSkip.GetComponent<Button>();
 
-            // Memeriksa apakah GameObject memiliki komponen Button
-            if (buttonComponent != null)
-            {
-                // Hapus komponen Button dari GameObject
-                Destroy(buttonComponent);
-            }
+        // Memeriksa apakah GameObject memiliki komponen Button
+        if (buttonComponent != null)
+        {
+            // Hapus komponen Button dari GameObject
+            Destroy(buttonComponent);
+        }
 
         StartCoroutine(LoadSceneDelayed(sceneName));
     }
@@ -133,5 +108,17 @@ public class IntroTextDisplay : MonoBehaviour
     {
         yield return new WaitForSeconds(2.5f); // Tunggu selama 2.5 detik
         SceneManager.LoadScene(sceneName); // Muat scene dengan nama yang diberikan
+    }
+
+    public void SkipToEnd()
+    {
+        isSkipped = true;
+
+        if (currentFadeCoroutine != null)
+        {
+            StopCoroutine(currentFadeCoroutine);
+        }
+
+        StartCoroutine(DisplayStoryText());
     }
 }

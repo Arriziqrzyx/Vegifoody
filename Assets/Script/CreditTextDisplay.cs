@@ -7,26 +7,14 @@ using UnityEngine.UI;
 public class CreditTextDisplay : MonoBehaviour
 {
     public TextMeshProUGUI introText;
-    public AudioSource typingAudioSource; // Referensi ke AudioSource
-
-    private string[] storyTexts = new string[]
-    {
-        "Setelah melewati berbagai rintangan dan tantangan, Budi akhirnya berhasil mengumpulkan semua sayuran sehat di kebun ajaib.",
-        "Sayuran-sehat itu tidak hanya memberikan kekuatan, tetapi juga wawasan baru tentang pentingnya kesehatan dan gizi.",
-        "Dengan ketekunan dan ketelitiannya, dia mampu menyelesaikan ujian dari Mewing & Skibidi dan mendapatkan kepercayaan dari Alok.",
-        "Alok, Mewing, dan Skibidi tersenyum bangga melihat perjuangan Budi. Kebun ajaib kini menjadi tempat yang lebih hidup dan harmonis berkat usaha keras Budi serta kehadiran sayuran-sehat yang membawa energi baru.",
-        "Di akhir petualangannya, Budi belajar bahwa dengan kerja keras, keberanian, dan ketekunan, tidak ada rintangan yang terlalu besar untuk diatasi.",
-        "Kebun ajaib pun kini menjadi simbol keberhasilan dan ketekunan, yang akan selalu menginspirasi Budi dalam setiap langkah kehidupannya.",
-        ".............................T  A  M  A  T............................."
-    };
-
-    public float typingSpeed = 0.05f;
     public float fadeDuration = 1.0f;
+    public float[] displayDurations; // Durasi setiap kalimat ditampilkan diatur melalui Inspector
+    public string[] storyTexts; // Kalimat-kalimat yang akan ditampilkan diatur melalui Inspector
     public GameObject buttonSkip;
     private const string dialogCreditKey = "DialogCreditPassed"; // Key untuk PlayerPrefs
 
-    private Coroutine currentTypingCoroutine;
-    private bool skipTyping = false;
+    private Coroutine currentFadeCoroutine;
+    private bool isSkipped = false;
 
     private void Start()
     {
@@ -50,50 +38,38 @@ public class CreditTextDisplay : MonoBehaviour
             canvasGroup = introText.gameObject.AddComponent<CanvasGroup>();
         }
 
-        yield return StartCoroutine(FadeCanvasGroup(canvasGroup, 0, 1, fadeDuration));
-
-        foreach (string storyText in storyTexts)
+        for (int i = 0; i < storyTexts.Length; i++)
         {
-            if (skipTyping)
+            if (isSkipped)
             {
-                introText.text = storyText;
                 break;
             }
 
-            currentTypingCoroutine = StartCoroutine(TypeText(storyText));
-            yield return currentTypingCoroutine;
-            yield return new WaitForSeconds(1.0f);
+            string storyText = storyTexts[i];
+            float displayDuration = displayDurations[i];
+
+            // Set the text and fade in
+            introText.text = storyText;
+            yield return StartCoroutine(FadeCanvasGroup(canvasGroup, 0, 1, fadeDuration));
+
+            // Wait for the display duration minus fade durations
+            yield return new WaitForSeconds(displayDuration - fadeDuration * 2);
+
+            // Fade out
+            yield return StartCoroutine(FadeCanvasGroup(canvasGroup, 1, 0, fadeDuration));
         }
 
-        yield return StartCoroutine(FadeCanvasGroup(canvasGroup, 1, 0, fadeDuration));
+        // If skipped, directly display "T  A  M  A  T"
+        if (isSkipped)
+        {
+            introText.text = ".............................T  A  M  A  T.............................";
+            yield return StartCoroutine(FadeCanvasGroup(canvasGroup, 0, 1, fadeDuration));
+            yield return new WaitForSeconds(displayDurations[displayDurations.Length - 1]);
+        }
 
         // Simpan status dialog ke PlayerPrefs
         PlayerPrefs.SetInt(dialogCreditKey, 1);
         SceneManager.LoadScene("Menu");
-    }
-
-    private IEnumerator TypeText(string text)
-    {
-        introText.text = "";
-
-        // Mulai memutar audio typing
-        typingAudioSource.Play();
-
-        foreach (char letter in text.ToCharArray())
-        {
-            if (skipTyping)
-            {
-                introText.text = text;
-                typingAudioSource.Stop();
-                yield break;
-            }
-
-            introText.text += letter;
-            yield return new WaitForSeconds(typingSpeed);
-        }
-
-        // Hentikan audio typing saat selesai mengetik
-        typingAudioSource.Stop();
     }
 
     private IEnumerator FadeCanvasGroup(CanvasGroup canvasGroup, float startAlpha, float endAlpha, float duration)
@@ -112,13 +88,9 @@ public class CreditTextDisplay : MonoBehaviour
 
     public void SceneLoad(string sceneName)
     {
-        skipTyping = true;
-
-        if (currentTypingCoroutine != null)
+        if (currentFadeCoroutine != null)
         {
-            StopCoroutine(currentTypingCoroutine);
-            introText.text = storyTexts[storyTexts.Length - 1];
-            typingAudioSource.Stop();
+            StopCoroutine(currentFadeCoroutine);
         }
 
         Button buttonComponent = buttonSkip.GetComponent<Button>();
@@ -137,5 +109,17 @@ public class CreditTextDisplay : MonoBehaviour
     {
         yield return new WaitForSeconds(2.5f); // Tunggu selama 2.5 detik
         SceneManager.LoadScene(sceneName); // Muat scene dengan nama yang diberikan
+    }
+
+    public void SkipToEnd()
+    {
+        isSkipped = true;
+
+        if (currentFadeCoroutine != null)
+        {
+            StopCoroutine(currentFadeCoroutine);
+        }
+
+        StartCoroutine(DisplayStoryText());
     }
 }

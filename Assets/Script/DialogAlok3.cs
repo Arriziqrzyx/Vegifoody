@@ -10,11 +10,13 @@ public class DialogAlok3 : MonoBehaviour
     public GameObject alokAvatar; 
     public float typingSpeed = 0.05f; 
     public float initialDelay = 0.5f; 
-    public float messageDelay = 1.5f; 
+    public float messageDelay = 1.0f; // Delay setelah audio selesai diputar
     public GameObject button; 
     public GameObject buttonSkip; 
     public GameObject alokObject;
     public AudioSource typingAudioSource; 
+    public AudioClip[] dialogAudioClips; // Array untuk klip audio dialog
+
     private string[] messages = new string[]
     {
         "Selamat datang Budi, kamu berhasil sampai di kebun ajaib.",
@@ -28,7 +30,6 @@ public class DialogAlok3 : MonoBehaviour
         "Itu dia. Sekarang, mari ikut aku mencari sayuran sehat di kebun ini. Kamu layak mengambil dan membawanya pulang. Sayuran-sayuran ini akan sangat bermanfaat untuk kesehatan dan pertumbuhan kamu budi."
     };
 
-
     private GameObject[] avatars; 
     private PlayerController2 playerController2;
     private int messageIndex = 0;
@@ -41,7 +42,13 @@ public class DialogAlok3 : MonoBehaviour
         buttonSkip.SetActive(false); 
         playerController2 = FindObjectOfType<PlayerController2>(); 
 
-        
+        // Pastikan array dialogAudioClips memiliki panjang yang sama dengan messages
+        if (dialogAudioClips.Length != messages.Length)
+        {
+            Debug.LogError("Length of dialogAudioClips array must be equal to the number of messages.");
+            return;
+        }
+
         avatars = new GameObject[] { alokAvatar, budiAvatar, alokAvatar, budiAvatar, alokAvatar, budiAvatar, alokAvatar, budiAvatar, alokAvatar };
 
         if (PlayerPrefs.GetInt(dialog5Key, 0) == 1)
@@ -58,23 +65,35 @@ public class DialogAlok3 : MonoBehaviour
 
         while (messageIndex < messages.Length)
         {
-            // isTyping = true;
             dialogText.text = ""; 
             avatars[messageIndex].SetActive(true); 
 
+            // Memutar audio dan menampilkan teks secara bersamaan
+            AudioClip clip = dialogAudioClips[messageIndex];
+            if (clip != null)
+            {
+                AudioSource audioSource = GetComponent<AudioSource>();
+                audioSource.clip = clip;
+                audioSource.Play();
+            }
+
             typingAudioSource.Play();
+            float typingDuration = 0f;
             foreach (char letter in messages[messageIndex].ToCharArray())
             {
                 dialogText.text += letter;
+                typingDuration += typingSpeed;
                 yield return new WaitForSeconds(typingSpeed);
             }
             typingAudioSource.Stop();
 
-            // isTyping = false;
+            // Tunggu hingga audio selesai diputar
+            yield return new WaitForSeconds(clip.length - typingDuration);
 
-            yield return new WaitForSeconds(messageDelay); 
+            // Tunggu tambahan delay 1 detik setelah audio selesai
+            yield return new WaitForSeconds(messageDelay);
 
-            
+            // Sembunyikan avatar jika perlu
             if (messageIndex < messages.Length - 1)
             {
                 avatars[messageIndex].SetActive(false); 
@@ -83,7 +102,6 @@ public class DialogAlok3 : MonoBehaviour
             messageIndex++;
         }
 
-        
         button.SetActive(true);
     }
 
@@ -96,6 +114,7 @@ public class DialogAlok3 : MonoBehaviour
         alokObject.GetComponent<BoxCollider2D>().enabled = false;
         gameObject.SetActive(false);  
     }
+
     public void ButtonSkip()
     {
         playerController2.enabled = true;

@@ -6015,6 +6015,7 @@ GameObject:
   - component: {fileID: 323575678844934384}
   - component: {fileID: 323575678844934399}
   - component: {fileID: 323575678844934400}
+  - component: {fileID: 323575678844934401}
   m_Layer: 5
   m_Name: DialogAlok1
   m_TagString: Untagged
@@ -6094,11 +6095,117 @@ MonoBehaviour:
   alokAvatar: {fileID: 323575680386436820}
   typingSpeed: 0.05
   initialDelay: 0.5
-  messageDelay: 1.5
+  messageDelay: 0.25
   button: {fileID: 323575679210614982}
   buttonSkip: {fileID: 120415263}
   alokObject: {fileID: 1218254642634812431}
   typingAudioSource: {fileID: 271054831}
+  dialogAudioClips:
+  - {fileID: 8300000, guid: c9386f6d526edc04bbe8d95240922934, type: 3}
+  - {fileID: 8300000, guid: ecdae0b4e0d437b40b06dff04b13901c, type: 3}
+  - {fileID: 8300000, guid: 6d00ccff8eb4b304db06640a4352c0e9, type: 3}
+  - {fileID: 8300000, guid: cdd9f0049b4e35e45b314b6c6c6781ca, type: 3}
+  - {fileID: 8300000, guid: 02aafc505b11fc14da201d49f737da5e, type: 3}
+  - {fileID: 8300000, guid: 1970e8fe93fa35340bba03c3f7ab276f, type: 3}
+  - {fileID: 8300000, guid: baebf3c17b09313458649c8c395f9b92, type: 3}
+  - {fileID: 8300000, guid: 9f9bb4a505c9c9f43a1a57d6b244081f, type: 3}
+  - {fileID: 8300000, guid: 32abdb0163968b74895cd5754ef86154, type: 3}
+--- !u!82 &323575678844934401
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 323575678844934397}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 4314824837642784927, guid: db5360c4e7941e54eb4387bbb946e750, type: 2}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &323575679210614968
 MonoBehaviour:
   m_ObjectHideFlags: 0

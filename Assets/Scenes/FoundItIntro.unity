@@ -1825,10 +1825,18 @@ MonoBehaviour:
   alokAvatar: {fileID: 6541572305186940040}
   typingSpeed: 0.05
   initialDelay: 0.5
-  messageDelay: 1.5
+  messageDelay: 0.25
   button: {fileID: 6541572304186371689}
   buttonSkip: {fileID: 441033918}
   typingAudioSource: {fileID: 50551989}
+  dialogAudioClips:
+  - {fileID: 8300000, guid: eb3e384ca7bec6d4fb63e6e6308896cc, type: 3}
+  - {fileID: 8300000, guid: 8a47e34cc39653b4d91fc6e595e8b253, type: 3}
+  - {fileID: 8300000, guid: 9ef7b101dabf85d4a947a6791751551f, type: 3}
+  - {fileID: 8300000, guid: 71355a64d48e8df4f8fc75399fe839fc, type: 3}
+  - {fileID: 8300000, guid: d75ce1d8ef2224541bbb9cc3883d24e3, type: 3}
+  - {fileID: 8300000, guid: fbff979e2fc9f1240b133f4d9ebc479e, type: 3}
+  - {fileID: 8300000, guid: dbd353e4254ed664b8c91dda8fda1e76, type: 3}
 --- !u!114 &6541572305357719908
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1905,6 +1913,7 @@ GameObject:
   - component: {fileID: 6541572305357719908}
   - component: {fileID: 6541572305357719907}
   - component: {fileID: 6541572305357719914}
+  - component: {fileID: 6541572305357719915}
   m_Layer: 5
   m_Name: DialogSkibidi
   m_TagString: Untagged
@@ -1925,3 +1934,99 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioMixer: {fileID: 0}
+--- !u!82 &6541572305357719915
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6541572305357719913}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 4314824837642784927, guid: db5360c4e7941e54eb4387bbb946e750, type: 2}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4

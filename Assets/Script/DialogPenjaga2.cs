@@ -1,7 +1,6 @@
 using UnityEngine;
 using TMPro;
 using System.Collections;
-using UnityEngine.UI;
 
 public class DialogPenjaga2 : MonoBehaviour
 {
@@ -10,11 +9,12 @@ public class DialogPenjaga2 : MonoBehaviour
     public GameObject skibidiAvatar; 
     public float typingSpeed = 0.05f; 
     public float initialDelay = 0.5f; 
-    public float messageDelay = 1.5f; 
+    public float messageDelay = 1.0f; // Delay setelah audio selesai diputar
     public GameObject button; 
     public GameObject buttonSkip; 
     public GameObject skibidiObject; 
     public AudioSource typingAudioSource;
+    public AudioClip[] dialogAudioClips; // Array untuk klip audio dialog
 
     private string[] messages = new string[]
     {
@@ -32,8 +32,6 @@ public class DialogPenjaga2 : MonoBehaviour
         "Aku berharap yang terbaik untukmu, Budi. Jangan buat aku kecewa. Jika kamu berhasil, kamu akan melihat pintu masuk kebun ajaib."
     };
 
-
-
     private GameObject[] avatars; 
     private PlayerController playerController;
     private int messageIndex = 0;
@@ -46,7 +44,13 @@ public class DialogPenjaga2 : MonoBehaviour
         buttonSkip.SetActive(false); 
         playerController = FindObjectOfType<PlayerController>(); 
 
-        
+        // Pastikan array dialogAudioClips memiliki panjang yang sama dengan messages
+        if (dialogAudioClips.Length != messages.Length)
+        {
+            Debug.LogError("Length of dialogAudioClips array must be equal to the number of messages.");
+            return;
+        }
+
         avatars = new GameObject[] { budiAvatar, skibidiAvatar, budiAvatar, skibidiAvatar, budiAvatar, skibidiAvatar, budiAvatar, skibidiAvatar, budiAvatar, skibidiAvatar, budiAvatar, skibidiAvatar };
 
         if (PlayerPrefs.GetInt(dialog4Key, 0) == 1)
@@ -63,22 +67,35 @@ public class DialogPenjaga2 : MonoBehaviour
 
         while (messageIndex < messages.Length)
         {
-            
             dialogText.text = ""; 
             avatars[messageIndex].SetActive(true); 
 
+            // Memutar audio dan menampilkan teks secara bersamaan
+            AudioClip clip = dialogAudioClips[messageIndex];
+            if (clip != null)
+            {
+                AudioSource audioSource = GetComponent<AudioSource>();
+                audioSource.clip = clip;
+                audioSource.Play();
+            }
+
             typingAudioSource.Play();
+            float typingDuration = 0f;
             foreach (char letter in messages[messageIndex].ToCharArray())
             {
                 dialogText.text += letter;
+                typingDuration += typingSpeed;
                 yield return new WaitForSeconds(typingSpeed);
             }
             typingAudioSource.Stop();
 
+            // Tunggu hingga audio selesai diputar
+            yield return new WaitForSeconds(clip.length - typingDuration);
 
-            yield return new WaitForSeconds(messageDelay); 
+            // Tunggu tambahan delay 1 detik setelah audio selesai
+            yield return new WaitForSeconds(messageDelay);
 
-            
+            // Sembunyikan avatar jika perlu
             if (messageIndex < messages.Length - 1)
             {
                 avatars[messageIndex].SetActive(false); 
@@ -87,7 +104,6 @@ public class DialogPenjaga2 : MonoBehaviour
             messageIndex++;
         }
 
-        
         button.SetActive(true);
     }
 

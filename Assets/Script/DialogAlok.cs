@@ -1,7 +1,6 @@
 using UnityEngine;
 using TMPro;
 using System.Collections;
-using UnityEngine.UI;
 
 public class DialogAlok : MonoBehaviour
 {
@@ -10,11 +9,13 @@ public class DialogAlok : MonoBehaviour
     public GameObject alokAvatar;
     public float typingSpeed = 0.05f;
     public float initialDelay = 0.5f;
-    public float messageDelay = 1.5f;
+    public float messageDelay = 1.0f; // Delay setelah audio selesai diputar
     public GameObject button;
     public GameObject buttonSkip;
     public GameObject alokObject;
     public AudioSource typingAudioSource;
+
+    public AudioClip[] dialogAudioClips; // Array untuk klip audio dialog
 
     private string[] messages = new string[]
     {
@@ -46,6 +47,13 @@ public class DialogAlok : MonoBehaviour
         {
             buttonSkip.SetActive(true); // Jika dialog sudah pernah dilakukan, aktifkan tombol skip
         }
+
+        // Pastikan array dialogAudioClips memiliki panjang yang sama dengan messages
+        if (dialogAudioClips.Length != messages.Length)
+        {
+            Debug.LogError("Length of dialogAudioClips array must be equal to the number of messages.");
+            return;
+        }
         
         StartCoroutine(StartDialog());
     }
@@ -59,14 +67,30 @@ public class DialogAlok : MonoBehaviour
             dialogText.text = "";
             avatars[messageIndex].SetActive(true);
 
+            // Mulai memutar audio
+            AudioClip clip = dialogAudioClips[messageIndex];
+            if (clip != null)
+            {
+                AudioSource audioSource = GetComponent<AudioSource>();
+                audioSource.clip = clip;
+                audioSource.Play();
+            }
+
+            // Tampilkan teks dengan kecepatan ketikan
             typingAudioSource.Play();
+            float typingDuration = 0f;
             foreach (char letter in messages[messageIndex].ToCharArray())
             {
                 dialogText.text += letter;
+                typingDuration += typingSpeed;
                 yield return new WaitForSeconds(typingSpeed);
             }
             typingAudioSource.Stop();
 
+            // Tunggu hingga audio selesai diputar
+            yield return new WaitForSeconds(clip.length - typingDuration);
+
+            // Tunggu tambahan delay 1 detik setelah audio selesai
             yield return new WaitForSeconds(messageDelay);
 
             if (messageIndex < messages.Length - 1)

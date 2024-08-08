@@ -604,7 +604,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 8
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -788,6 +788,7 @@ GameObject:
   - component: {fileID: 1999701137}
   - component: {fileID: 1999701139}
   - component: {fileID: 1999701140}
+  - component: {fileID: 1999701141}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -868,9 +869,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   introText: {fileID: 986373657}
-  typingAudioSource: {fileID: 1999701140}
-  typingSpeed: 0.05
   fadeDuration: 1
+  displayDurations:
+  - 7.8
+  - 7.5
+  - 8.2
+  - 13.1
+  - 10
+  - 8.8
+  - 3
+  storyTexts:
+  - Setelah melewati berbagai rintangan dan tantangan, Budi akhirnya berhasil mengumpulkan
+    semua sayuran sehat di kebun ajaib.
+  - Sayuran-sehat itu tidak hanya memberikan kekuatan, tetapi juga wawasan baru tentang
+    pentingnya kesehatan dan gizi.
+  - Dengan ketekunan dan ketelitiannya, dia mampu menyelesaikan ujian dari Mewing
+    & Skibidi dan mendapatkan kepercayaan dari Alok.
+  - Alok, Mewing, dan Skibidi tersenyum bangga melihat perjuangan Budi. Kebun ajaib
+    kini menjadi tempat yang lebih hidup dan harmonis berkat usaha keras Budi serta
+    kehadiran sayuran-sehat yang membawa energi baru.
+  - Di akhir petualangannya, Budi belajar bahwa dengan kerja keras, keberanian, dan
+    ketekunan, tidak ada rintangan yang terlalu besar untuk diatasi.
+  - Kebun ajaib pun kini menjadi simbol keberhasilan dan ketekunan, yang akan selalu
+    menginspirasi Budi dalam setiap langkah kehidupannya.
+  - T  A  M  A  T
   buttonSkip: {fileID: 2000140240}
 --- !u!82 &1999701140
 AudioSource:
@@ -884,6 +906,102 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 4314824837642784927, guid: db5360c4e7941e54eb4387bbb946e750, type: 2}
   m_audioClip: {fileID: 8300000, guid: eb53208a09c682948834b9348a925b6c, type: 3}
   m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!82 &1999701141
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1999701135}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 4314824837642784927, guid: db5360c4e7941e54eb4387bbb946e750, type: 2}
+  m_audioClip: {fileID: 8300000, guid: a0259e54915127d40aeac335c269831c, type: 3}
+  m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -1086,6 +1204,30 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: Menu
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1999701141}
+        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+        m_MethodName: Stop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1999701139}
+        m_TargetAssemblyTypeName: CreditTextDisplay, Assembly-CSharp
+        m_MethodName: SkipToEnd
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &2000140243
